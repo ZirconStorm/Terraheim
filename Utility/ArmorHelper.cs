@@ -677,7 +677,7 @@ namespace Terraheim.Utility
                 //Create the custome recipe
                 CustomRecipe customPieceRecipe = new CustomRecipe(recipe, fixReference: true, fixRequirementReferences: true);
 
-                ItemManager.Instance.AddItem(piece);
+                Log.LogInfo($"{name} created: {ItemManager.Instance.AddItem(piece)}");
 
                 //Add recipes to DB
                 ItemManager.Instance.AddRecipe(customPieceRecipe);
@@ -889,7 +889,7 @@ namespace Terraheim.Utility
                 List<Piece.Requirement> chestList = chestRecipe.m_resources.ToList();
                 List<Piece.Requirement> legsList = legsRecipe.m_resources.ToList();
 
-                if (setName == "s222ilver")
+                if (setName == "silver")
                 {
 
                     if (hasHelmet)

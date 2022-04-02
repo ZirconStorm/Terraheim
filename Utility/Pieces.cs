@@ -27,7 +27,7 @@ namespace Terraheim.Utility
                 }
             };
 
-            CustomPiece CP = new CustomPiece(AssetHelper.PieceReforgerPrefab, config);
+            CustomPiece CP = new CustomPiece(AssetHelper.PieceReforgerPrefab, false, config);
 
             if (CP != null)
             {
@@ -96,11 +96,11 @@ namespace Terraheim.Utility
                     }
             };
 
-            CustomPiece CP1 = new CustomPiece(AssetHelper.PieceReforgerExt1Prefab, config1);
-            CustomPiece CP2 = new CustomPiece(AssetHelper.PieceReforgerExt2Prefab, config2);
-            CustomPiece CP3 = new CustomPiece(AssetHelper.PieceReforgerExt3Prefab, config3);
-            CustomPiece CP4 = new CustomPiece(AssetHelper.PieceReforgerExt4Prefab, config4);
-            CustomPiece CP5 = new CustomPiece(AssetHelper.PieceReforgerExt5Prefab, config5);
+            CustomPiece CP1 = new CustomPiece(AssetHelper.PieceReforgerExt1Prefab, false, config1);
+            CustomPiece CP2 = new CustomPiece(AssetHelper.PieceReforgerExt2Prefab, false, config2);
+            CustomPiece CP3 = new CustomPiece(AssetHelper.PieceReforgerExt3Prefab, false, config3);
+            CustomPiece CP4 = new CustomPiece(AssetHelper.PieceReforgerExt4Prefab, false, config4);
+            CustomPiece CP5 = new CustomPiece(AssetHelper.PieceReforgerExt5Prefab, false, config5);
 
             PieceManager.Instance.AddPiece(CP1);
             PieceManager.Instance.AddPiece(CP2);

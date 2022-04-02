@@ -7,11 +7,12 @@ namespace Terraheim.Armor
     {
         internal static void Init()
         {
-            ItemManager.OnVanillaItemsAvailable += AddArmorSets;
+            PrefabManager.OnPrefabsRegistered += AddArmorSets;
             ItemManager.OnItemsRegistered += ModExistingRecipes;
         }
         private static void AddArmorSets()
         {
+            Log.LogInfo("Vanilla Prefabs Registered. Adding armor sets...");
             if ((bool)Terraheim.balance["leather"]["enabled"])
                 ArmorHelper.AddArmorSet("leather");
             //ArmorHelper.AddArmorSet("rags");
@@ -38,14 +39,18 @@ namespace Terraheim.Armor
             if (Terraheim.hasJudesEquipment)
             {
                 ArmorHelper.AddArmorSet("barbarian");
+                //ArmorHelper.AddArmorSet("warrior");
                 ArmorHelper.AddArmorSet("plate");
+                //ArmorHelper.AddArmorSet("dragonslayer");
                 ArmorHelper.AddArmorSet("nomad");
+                //ArmorHelper.AddArmorSet("serpent");
+                //ArmorHelper.AddArmorSet("scorched");
             }
             else if (Terraheim.hasBarbarianArmor)
                 ArmorHelper.AddArmorSet("barbarian");
-            
-            /*if (Terraheim.hasChaosArmor)
-                ArmorHelper.AddArmorSet("chaos");*/
+
+            if (Terraheim.hasChaosArmor)
+                ArmorHelper.AddArmorSet("chaos");
 
             ArmorHelper.AddBelt("woodsmanHelmet");
             ArmorHelper.AddBelt("minersBelt");
@@ -60,7 +65,7 @@ namespace Terraheim.Armor
             ArmorHelper.AddCape("CapeLinen", "linen");
             if (Terraheim.hasBarbarianArmor)
                 ArmorHelper.AddCape("ArmorBarbarianCapeJD", "barbarian");
-            ItemManager.OnVanillaItemsAvailable -= AddArmorSets;
+            PrefabManager.OnPrefabsRegistered -= AddArmorSets;
         }
 
         private static void ModExistingRecipes()
@@ -80,12 +85,18 @@ namespace Terraheim.Armor
                 ArmorHelper.AddTieredRecipes("padded");
             if (Terraheim.hasJudesEquipment)
             {
+                //ArmorHelper.AddArmorSet("barbarian");
+                //ArmorHelper.AddArmorSet("plate");
+                //ArmorHelper.AddArmorSet("nomad");
                 ArmorHelper.AddTieredRecipes("barbarian");
                 ArmorHelper.AddTieredRecipes("plate");
                 ArmorHelper.AddTieredRecipes("nomad");
             }
-            else if (Terraheim.hasBarbarianArmor)
-                ArmorHelper.AddTieredRecipes("barbarian");
+            //else if (Terraheim.hasBarbarianArmor)
+            //{
+            //    //ArmorHelper.AddArmorSet("barbarian");
+            //    ArmorHelper.AddTieredRecipes("barbarian");
+            //}
             /*if (Terraheim.hasChaosArmor)
                 ArmorHelper.AddTieredRecipes("chaos");*/
             if((bool)Terraheim.balance["rags"]["enabled"])
@@ -95,8 +106,11 @@ namespace Terraheim.Armor
             ArmorHelper.AddTieredCape("CapeDeerHide");
             ArmorHelper.AddTieredCape("CapeTrollHide");
             ArmorHelper.AddTieredCape("CapeLinen");
-            if (Terraheim.hasBarbarianArmor)
-                ArmorHelper.AddTieredCape("ArmorBarbarianCapeJD");
+            //if (Terraheim.hasBarbarianArmor)
+            //{
+            //    //ArmorHelper.AddCape("ArmorBarbarianCapeJD", "barbarian");
+            //    ArmorHelper.AddTieredCape("ArmorBarbarianCapeJD");
+            //}
             ItemManager.OnItemsRegistered -= ModExistingRecipes;
         }
     }
