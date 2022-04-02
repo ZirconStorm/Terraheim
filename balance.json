@@ -380,8 +380,8 @@
         "armorPerLevel": 2,
         "globalMoveMod": 0,
         "setEffect": "wyrdarrow",
-        "headEffect": "bowdaggerspearsilverdmg",
-        "chestEffect": "ammoconsumption",
+        "headEffect": "frostningdmg",
+        "chestEffect": "frostningvuln",
         "legsEffect": "drawmovespeed",
         "setBonusVal": 1,
         "setActivationCount": 6,
@@ -399,7 +399,7 @@
                 "setActivationCount": 4,
                 "setAoESize": 2,
                 "headEffectVal": 0.1,
-                "chestEffectVal": 15,
+                "chestEffectVal": 0.5,
                 "legsEffectVal": 0.25
             },
             "t6": {
@@ -410,7 +410,7 @@
                 "setActivationCount": 4,
                 "setAoESize": 2,
                 "headEffectVal": 0.12,
-                "chestEffectVal": 17,
+                "chestEffectVal": 0.5,
                 "legsEffectVal": 0.28
             }
         }

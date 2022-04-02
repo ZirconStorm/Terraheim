@@ -305,6 +305,23 @@ namespace Terraheim.Patches
                 }
             }
 
+            if (attacker.GetSEMan().HaveStatusEffect("Frost/Lightning Vulnerable"))
+            {
+                Log.LogMessage("Checking if weak...");
+                if (UtilityFunctions.CheckIfVulnerable(__instance, hit))
+                {
+                    Log.LogMessage("AM WEAK AHHHHHHHHHHHHHHHHHHHHHH");
+                    var effect = attacker.GetSEMan().GetStatusEffect("Frost/Lightning Vulnerable") as SE_ForstLightningVulnerable;
+
+                    var totalDamage = hit.GetTotalDamage();
+                    var elementDamage = (totalDamage * effect.GetDamageBonus()) / 2;
+                    __instance.AddFrostDamage(elementDamage);
+                    __instance.AddFrostDamage(elementDamage);
+                    Log.LogMessage("elemental damage " + elementDamage);
+                    Log.LogInfo($"damage {hit.GetTotalDamage()}");
+                }
+            }
+
             if (attacker.GetSEMan().HaveStatusEffect("Coin Drop") && hit.GetTotalDamage() > 10)
             {
                 SE_CoinDrop status = attacker.GetSEMan().GetStatusEffect("Coin Drop") as SE_CoinDrop;

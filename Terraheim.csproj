@@ -153,6 +153,7 @@
     <Compile Include="ArmorEffects\SE_Pinned.cs" />
     <Compile Include="ArmorEffects\SE_PinnedCooldown.cs" />
     <Compile Include="ArmorEffects\SE_Pinning.cs" />
+    <Compile Include="ArmorEffects\SE_ForstLightningVulnerable.cs" />
     <Compile Include="ArmorEffects\SE_PoisonVulnerable.cs" />
     <Compile Include="ArmorEffects\SE_RangerWeaponBonus.cs" />
     <Compile Include="ArmorEffects\SE_RestoreResources.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="ArmorEffects\SE_ShieldFireHeal.cs" />
     <Compile Include="ArmorEffects\SE_ShieldFireListener.cs" />
     <Compile Include="ArmorEffects\SE_ShieldFireParryListener.cs" />
+    <Compile Include="ArmorEffects\SE_FrostLightningDamageBonus.cs" />
     <Compile Include="ArmorEffects\SE_SneakMovement.cs" />
     <Compile Include="ArmorEffects\SE_StaggerCapacity.cs" />
     <Compile Include="ArmorEffects\SE_StaggerDamage.cs" />

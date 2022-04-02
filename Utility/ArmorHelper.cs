@@ -275,6 +275,14 @@ namespace Terraheim.Utility
                             description += $"\n\nAll weapons gain <color=cyan>{effect.GetDamageBonus()}</color> spirit damage.";
                         return effect;
                     }
+                case "frostningdmg":    //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_FrostLightningDamageBonus>();
+                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\nAll attacks gain <color=cyan>{effect.GetDamageBonus() * 100}%</color> damage as frost and lightning damage.";
+                        return effect;
+                    }
                 case "fooduse":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_FoodUsage>();
@@ -382,6 +390,14 @@ namespace Terraheim.Utility
                         effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
                         if(!Terraheim.hasAuga)
                             description += $"\n\nStriking an enemy with a damage type it is vulnerable deals <color=cyan>{effect.GetDamageBonus() * 100}%</color> of the damage dealt as poison damage.";
+                        return effect;
+                    }
+                case "frostningvuln":   //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_ForstLightningVulnerable>();
+                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\nStriking an enemy with a damage type it is vulnerable deals <color=cyan>{effect.GetDamageBonus() * 100}%</color> of the damage dealt as frost and lighting damage.";
                         return effect;
                     }
                 case "challengemvespd":
@@ -796,6 +812,7 @@ namespace Terraheim.Utility
 
         public static void AddArmorSet(string setName)
         {
+            Log.LogWarning("Adding " + setName + " set");
             AddArmorPiece(setName, "head");
             AddArmorPiece(setName, "chest");
             AddArmorPiece(setName, "legs");

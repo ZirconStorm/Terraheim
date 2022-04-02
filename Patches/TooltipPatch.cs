@@ -86,6 +86,7 @@ namespace Terraheim.Patches
             float totalMultiplier = 0f;
             float frostDamage = 0f;
             float spiritDamage = 0f;
+            float lightningDamage = 0f;
 
             if (item == null || seman == null || localplayer == null || item.m_shared == null || item.m_shared.m_name == null )
                 return;
@@ -151,6 +152,12 @@ namespace Terraheim.Patches
             {
                 var effect = localplayer.GetSEMan().GetStatusEffect("Silver Damage Bonus") as SE_SilverDamageBonus;
                 spiritDamage += (item.GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
+                frostDamage += (item.GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
+            }
+            if (seman.HaveStatusEffect("Frost/Lightning Damage Bonus"))
+            {
+                var effect = localplayer.GetSEMan().GetStatusEffect("Frost/Lightning Damage Bonus") as SE_FrostLightningDamageBonus;
+                lightningDamage += (item.GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
                 frostDamage += (item.GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
             }
             if (seman.HaveStatusEffect("Spirit Damage Bonus"))
@@ -329,6 +336,31 @@ namespace Terraheim.Patches
                     if (index > -1)
                     {
                         tooltip = tooltip.Insert(index, $"<color=cyan>$inventory_frost: {item.GetDamage().m_frost + frostDamage} ({dmgBonusMin:#.#}-{dmgBonusMax:#.#})</color>\n");
+                    }
+                }
+            }
+            if (lightningDamage > 0f)
+            {
+                localplayer.GetSkills().GetRandomSkillRange(out var min, out var max, item.m_shared.m_skillType);
+                int minRange = Mathf.RoundToInt(item.GetDamage().m_lightning * min);
+                int maxRange = Mathf.RoundToInt(item.GetDamage().m_lightning * max);
+                string toolString = $"$inventory_lightning: <color=orange>{item.GetDamage().m_frost}</color> <color=yellow>({minRange}-{maxRange}) </color>";
+
+                var dmgBonusMin = ((item.GetDamage().m_lightning + lightningDamage) * min);
+                var dmgBonusMax = ((item.GetDamage().m_lightning + lightningDamage) * max);
+
+                var index = tooltip.IndexOf(toolString);
+                if (index > -1)
+                {
+                    tooltip = tooltip.Insert(index + toolString.Length, $"<color=orange>|</color> <color=cyan>({dmgBonusMin:#.#}-{dmgBonusMax:#.#})</color>");
+                }
+                else
+                {
+                    string newString = $"$item_blockpower: <color=orange>{item.m_shared.m_blockPower}</color> <color=yellow>({item.m_shared.m_blockPower})</color>";
+                    index = tooltip.IndexOf(newString);
+                    if (index > -1)
+                    {
+                        tooltip = tooltip.Insert(index, $"<color=cyan>$inventory_frost: {item.GetDamage().m_lightning + lightningDamage} ({dmgBonusMin:#.#}-{dmgBonusMax:#.#})</color>\n");
                     }
                 }
             }

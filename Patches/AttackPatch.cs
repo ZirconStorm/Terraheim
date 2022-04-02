@@ -221,7 +221,8 @@ namespace Terraheim.Patches
             weapon.m_shared.m_damages.m_spirit = baseWeapon.m_itemData.m_shared.m_damages.m_spirit;
             if (weapon.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow || weapon.m_shared.m_name.Contains("spear") || weapon.m_shared.m_name.Contains("knife"))
             {
-                if (character.GetSEMan().HaveStatusEffect("Silver Damage Bonus")) {
+                if (character.GetSEMan().HaveStatusEffect("Silver Damage Bonus"))
+                {
                     SE_SilverDamageBonus effect = character.GetSEMan().GetStatusEffect("Silver Damage Bonus") as SE_SilverDamageBonus;
 
                     var totalDamage = weapon.GetDamage().GetTotalDamage();
@@ -252,6 +253,22 @@ namespace Terraheim.Patches
                 SE_SpiritDamageBonus effect = character.GetSEMan().GetStatusEffect("Spirit Damage Bonus") as SE_SpiritDamageBonus;
                 weapon.m_shared.m_damages.m_spirit += effect.GetDamageBonus();
                 //Log.LogMessage("weapon spirit damage " + weapon.m_shared.m_damages.m_spirit);
+            }
+
+            Log.LogWarning(12);
+            //Frost & Lightning Damage Bonus Effect
+            weapon.m_shared.m_damages.m_frost = baseWeapon.m_itemData.m_shared.m_damages.m_frost;
+            weapon.m_shared.m_damages.m_lightning = baseWeapon.m_itemData.m_shared.m_damages.m_lightning;
+            if (character.GetSEMan().HaveStatusEffect("Frost/Lightning Damage Bonus"))
+            {
+                SE_FrostLightningDamageBonus effect = character.GetSEMan().GetStatusEffect("Frost/Lightning Damage Bonus") as SE_FrostLightningDamageBonus;
+
+                var totalDamage = weapon.GetDamage().GetTotalDamage();
+                var elementDamage = (totalDamage * effect.GetDamageBonus()) / 2;
+                weapon.m_shared.m_damages.m_frost += elementDamage;
+                weapon.m_shared.m_damages.m_lightning += elementDamage;
+                Log.LogMessage("elemental damage " + elementDamage);
+                Log.LogMessage("weapon Element damage " + weapon.m_shared.m_damages.m_frost + ", " + weapon.m_shared.m_damages.m_lightning);
             }
 
             //Log.LogWarning(15);
