@@ -364,6 +364,24 @@ namespace Terraheim.Patches
                 }
             }
 
+            if (character.GetSEMan().HaveStatusEffect("Njords AngerFX"))
+            {
+                Log.LogInfo("Njord Enraged");
+                if (weapon.m_shared.m_name.Contains("_knife") && __instance.m_attackAnimation == weapon.m_shared.m_secondaryAttack.m_attackAnimation)
+                {
+                    var effect = character.GetSEMan().GetStatusEffect("Njords Anger") as SE_LightningAoECounter;
+                    var damageBonus = (weapon.m_shared.m_damages.GetTotalDamage() * effect.GetDamageBonus());
+                    AssetHelper.TestProjectile.GetComponent<Projectile>().m_spawnOnHit.GetComponent<Aoe>().m_radius = effect.GetAoESize();
+
+                    AssetHelper.TestProjectile.GetComponent<Projectile>().m_spawnOnHit.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+
+                    //Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " frost and " + damageBonus + " spirit damage.");
+
+                    __instance.m_attackProjectile = AssetHelper.TestProjectile;
+                    __instance.m_attackType = Attack.AttackType.Projectile;
+                }
+            }
+
             if (character.GetSEMan().HaveStatusEffect("Mercenary") && (__instance.m_attackAnimation == weapon.m_shared.m_secondaryAttack.m_attackAnimation || __instance.m_attackAnimation == weapon.m_shared.m_attack.m_attackAnimation))
             {
                 SE_Mercenary effect = character.GetSEMan().GetStatusEffect("Mercenary") as SE_Mercenary;
@@ -495,6 +513,45 @@ namespace Terraheim.Patches
                     }
                 }
             }
+            else if (__instance.m_character.GetSEMan().HaveStatusEffect("Njords AngerFX"))
+            {
+                var effect = __instance.m_character.GetSEMan().GetStatusEffect("Njords Anger") as SE_LightningAoECounter;
+
+                AssetHelper.TestExplosion.GetComponent<Aoe>().m_radius = effect.GetAoESize();
+                if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow)
+                {
+                    var damageBonus = (__instance.GetWeapon().GetDamage().GetTotalDamage() + __instance.m_ammoItem.m_shared.m_damages.GetTotalDamage()
+                        * effect.GetDamageBonus());
+                    if (__instance.GetWeapon().m_shared.m_name.Contains("bow_fireTH"))
+                    {
+                        AssetHelper.FlamebowWyrdExplosion.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+
+                        Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " lightning damage.");
+
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.FlamebowWyrdExplosion;
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                    }
+                    else
+                    {
+                        AssetHelper.TestExplosion.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+
+                        Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " lightning damage.");
+
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.TestExplosion;
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                    }
+
+                }
+                else if (__instance.GetWeapon().m_shared.m_name.Contains("spear"))
+                {
+                    var damageBonus = (__instance.GetWeapon().GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
+                    AssetHelper.TestExplosion.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+                    Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " lightning damage.");
+
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.TestExplosion;
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                }
+            }
             else if (__instance.m_character.IsPlayer() && __instance.GetWeapon().m_shared.m_name.Contains("bow_fireTH"))
             {
                 JObject balance = UtilityFunctions.GetJsonFromFile("weaponBalance.json");
@@ -553,7 +610,7 @@ namespace Terraheim.Patches
             }
             else if (__instance.m_character.GetSEMan().HaveStatusEffect("Wyrdarrow2"))
             {
-                Log.LogInfo("FireProjectileThingy");
+                //Log.LogInfo("FireProjectileThingy");
                 if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow && __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit == AssetHelper.TestExplosion)
                 {
                     Log.LogInfo("first if");
@@ -564,6 +621,24 @@ namespace Terraheim.Patches
                 {
                     Log.LogInfo("second if");
                     var effect = __instance.m_character.GetSEMan().GetStatusEffect("Wyrdarrow2") as SE_BowAoECounter;
+                    effect.ClearCounter();
+                }
+            }
+            else if (__instance.m_character.GetSEMan().HaveStatusEffect("Njords Anger"))
+            {
+                if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow && __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit == AssetHelper.TestExplosion)
+                {
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = null;
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 0;
+                }
+                else if (__instance.GetWeapon().m_shared.m_name.Contains("spear") && __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit == AssetHelper.TestExplosion)
+                {
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = null;
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 0;
+                }
+                if (__instance.m_character.GetSEMan().HaveStatusEffect("Njords AngerFX"))
+                {
+                    var effect = __instance.m_character.GetSEMan().GetStatusEffect("Njords Anger") as SE_LightningAoECounter;
                     effect.ClearCounter();
                 }
             }

@@ -51,9 +51,19 @@ namespace Terraheim.Utility
                         effect.SetIcon();
                         return effect;
                     }
-                case "wyrdarrow2":
+                case "wyrdarrow2":  //**NEW**
                     {
                         var effect = ScriptableObject.CreateInstance<SE_BowAoECounter>();
+                        effect.SetDamageBonus((float)values["setBonusVal"]);
+                        effect.SetActivationCount((int)values["setActivationCount"]);
+                        effect.SetAoESize((float)values["setAoESize"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
+                case "njordsanger":
+                    {
+                        Log.LogMessage("hello");
+                        var effect = ScriptableObject.CreateInstance<SE_LightningAoECounter>();
                         effect.SetDamageBonus((float)values["setBonusVal"]);
                         effect.SetActivationCount((int)values["setActivationCount"]);
                         effect.SetAoESize((float)values["setAoESize"]);

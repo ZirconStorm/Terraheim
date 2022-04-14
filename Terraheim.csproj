@@ -99,6 +99,9 @@
     <Compile Include="ArmorEffects\ChosenEffects\SE_Withdrawals.cs" />
     <Compile Include="ArmorEffects\SE_Afterburn.cs" />
     <Compile Include="ArmorEffects\SE_AfterburnCooldown.cs" />
+    <Compile Include="ArmorEffects\SE_LightningAoECounter.cs" />
+    <Compile Include="ArmorEffects\SE_LightningAoECounterExhausted.cs" />
+    <Compile Include="ArmorEffects\SE_LightningAoECounterFX.cs" />
     <Compile Include="ArmorEffects\SE_BowAoECounterExhausted.cs" />
     <Compile Include="ArmorEffects\SE_BowAoECounterFX.cs" />
     <Compile Include="ArmorEffects\SE_BowAoECounter.cs" />
