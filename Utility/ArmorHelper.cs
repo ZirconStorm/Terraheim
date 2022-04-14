@@ -51,6 +51,15 @@ namespace Terraheim.Utility
                         effect.SetIcon();
                         return effect;
                     }
+                case "wyrdarrow2":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_BowAoECounter>();
+                        effect.SetDamageBonus((float)values["setBonusVal"]);
+                        effect.SetActivationCount((int)values["setActivationCount"]);
+                        effect.SetAoESize((float)values["setAoESize"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
                 case "thorns":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_Thorns>();
@@ -171,6 +180,14 @@ namespace Terraheim.Utility
                             $"\nSpear Damage is increased by <color=cyan>{effect.getDamageBonus() * 100}%</color>.";
                         return effect;
                     }
+                case "fistdmg":     // **NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_FistDamageBonus>();
+                        effect.setDamageBonus((float)values[$"{location}EffectVal"]);
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\nFist-based Weapon Damage is increased by <color=cyan>{effect.getDamageBonus() * 100}%</color>.";
+                        return effect;
+                    }
                 case "ammoconsumption":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_AmmoConsumption>();
@@ -234,6 +251,14 @@ namespace Terraheim.Utility
                             description += $"\n\nBows, daggers, and spears gain <color=cyan>{effect.GetDamageBonus() * 100}%</color> damage as spirit and frost damage.";
                         return effect;
                     }
+                case "bowdaggerspearlightdmg":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_LightningDamageBonus>();
+                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\nBows, daggers, and spears gain <color=cyan>{effect.GetDamageBonus() * 100}%</color> damage as lightning damage.";
+                        return effect;
+                    }
                 case "drawmovespeed":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_DrawMoveSpeed>();
@@ -248,6 +273,15 @@ namespace Terraheim.Utility
                         effect.SetBlockPower((float)values[$"{location}EffectVal"]);
                         if(!Terraheim.hasAuga)
                             description += $"\n\nBlock power increased by <color=cyan>{effect.GetBlockPower() * 100}%</color>.";
+                        return effect;
+                    }
+                case "healthblockbns":      //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_HealthBlockBonus>();
+                        effect.SetBonus((float)values[$"{location}EffectVal"]);
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\nBlock power increased by <color=cyan>{effect.GetBlockPower() * 100}%</color>. " +
+                                $"Max HP is increased by <color=cyan>{effect.GetHealthBonus() * 100}</color>.";
                         return effect;
                     }
                 case "healonblock":
@@ -283,6 +317,24 @@ namespace Terraheim.Utility
                             description += $"\n\nAll attacks gain <color=cyan>{effect.GetDamageBonus() * 100}%</color> damage as frost and lightning damage.";
                         return effect;
                     }
+                case "frostthorns":     //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_ThornsFrost>();
+                        effect.SetReflectPercent((float)values["setBonusVal"]);
+                        effect.SetIcon();
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\n<color=cyan>{effect.GetReflectPercent() * 100}%</color> damage is reflected back to an attacker as frost and spirit damage.";
+                        return effect;
+                    }
+                case "firethorns":     //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_ThornsFire>();
+                        effect.SetReflectPercent((float)values["setBonusVal"]);
+                        effect.SetIcon();
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\n<color=cyan>{effect.GetReflectPercent() * 100}%</color> damage is reflected back to an attacker as fire and lightning damage.";
+                        return effect;
+                    }
                 case "fooduse":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_FoodUsage>();
@@ -298,22 +350,22 @@ namespace Terraheim.Utility
                         description += $"\n\nReduce stamina use for melee weapons by <color=cyan>{effect.GetStaminaUse() * 100}%</color>.";
                         return effect;
                     }
-                case "throwdmg":
+                case "throwdmgvel":
                     {
-                        var effect = ScriptableObject.CreateInstance<SE_ThrowingDamageBonus>();
+                        var effect = ScriptableObject.CreateInstance<SE_ThrowingWeaponBonus>();
                         effect.setDamageBonus((float)values[$"{location}EffectVal"]);
                         if(!Terraheim.hasAuga)
-                            description += $"\n\nDamage with throwing weapons is increased by <color=cyan>{effect.getDamageBonus() * 100}%</color>.";
+                            description += $"\n\nThrowing weapon damage and velocity is increased by <color=cyan>{effect.getDamageBonus() * 100}%</color>.";
                         return effect;
                     }
-                case "throwvel":
-                    {
-                        var effect = ScriptableObject.CreateInstance<SE_ThrowingWeaponVelocity>();
-                        effect.SetVelocityBonus((float)values[$"{location}EffectVal"]);
-                        if(!Terraheim.hasAuga)
-                            description += $"\n\nThrowing weapons velocity is increased by <color=cyan>{effect.GetVelocityBonus() * 100}%</color>.";
-                        return effect;
-                    }
+                //case "throwvel":
+                //    {
+                //        var effect = ScriptableObject.CreateInstance<SE_ThrowingWeaponVelocity>();
+                //        effect.SetVelocityBonus((float)values[$"{location}EffectVal"]);
+                //        if(!Terraheim.hasAuga)
+                //            description += $"\n\nThrowing weapons velocity is increased by <color=cyan>{effect.GetVelocityBonus() * 100}%</color>.";
+                //        return effect;
+                //    }
                 case "dmgvslowhp":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_DamageVSLowHP>();
@@ -394,7 +446,7 @@ namespace Terraheim.Utility
                     }
                 case "frostningvuln":   //**NEW**
                     {
-                        var effect = ScriptableObject.CreateInstance<SE_ForstLightningVulnerable>();
+                        var effect = ScriptableObject.CreateInstance<SE_FrostLightningVulnerable>();
                         effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
                         if (!Terraheim.hasAuga)
                             description += $"\n\nStriking an enemy with a damage type it is vulnerable deals <color=cyan>{effect.GetDamageBonus() * 100}%</color> of the damage dealt as frost and lighting damage.";
@@ -440,6 +492,14 @@ namespace Terraheim.Utility
                         effect.SetParryBonus((float)values[$"{location}EffectVal"]);
                         if(!Terraheim.hasAuga)
                             description += $"\n\nParry Bonus is increased by <color=cyan>{effect.GetParryBonus() * 100}%</color>.";
+                        return effect;
+                    }
+                case "bluntdmg": //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_BluntArrows>();
+                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
+                        if (!Terraheim.hasAuga)
+                            description += $"\n\nArrows deal an additional <color=cyan>{effect.GetDamageBonus() * 100}%</color> damage as blunt.";
                         return effect;
                     }
                 case "coindrop":
@@ -588,6 +648,63 @@ namespace Terraheim.Utility
 
             if ((string)values[$"{location}Effect"] == "challengemvespd")
                 piece.m_shared.m_movementModifier += (float)values[$"{location}EffectVal"];
+
+            //// **NEW**
+            //if (setName == "troll")
+            //{
+            //    if (location == "head")
+            //    {
+            //        piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //        {
+            //            m_type = HitData.DamageType.Poison,
+            //            m_modifier = HitData.DamageModifier.Resistant
+            //        });
+            //    }
+            //    else if (location == "chest")
+            //    {
+            //        piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //        {
+            //            m_type = HitData.DamageType.Pierce,
+            //            m_modifier = HitData.DamageModifier.Resistant
+            //        });
+            //    }
+
+            //    piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //    {
+            //        m_type = HitData.DamageType.Fire,
+            //        m_modifier = HitData.DamageModifier.Weak
+            //    });
+            //}
+            //else if (setName == "crystal")
+            //{
+            //    if (location == "chest")
+            //    {
+            //        piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //        {
+            //            m_type = HitData.DamageType.Pierce,
+            //            m_modifier = HitData.DamageModifier.VeryResistant
+            //        });
+            //    }
+            //    else if (location == "legs")
+            //    {
+            //        piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //        {
+            //            m_type = HitData.DamageType.Slash,
+            //            m_modifier = HitData.DamageModifier.VeryResistant
+            //        });
+            //    }
+            //    piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //    {
+            //        m_type = HitData.DamageType.Blunt,
+            //        m_modifier = HitData.DamageModifier.VeryWeak
+            //    });
+            //    piece.m_shared.m_damageModifiers.Add(new HitData.DamageModPair()
+            //    {
+            //        m_type = HitData.DamageType.Fire,
+            //        m_modifier = HitData.DamageModifier.Weak
+            //    });
+                
+            //}
 
             if (status != null)
                 piece.m_shared.m_equipStatusEffect = status;

@@ -76,6 +76,27 @@ namespace Terraheim.Patches
                     tooltip = tooltip.Insert(index + blockPowerString.Length, $" <color=orange>|</color> <color=cyan>{blockBonus:#.##}x</color>");
                 }
             }
+            if (localplayer.GetSEMan().HaveStatusEffect("Health/Block Increase"))
+            {
+                SE_HealthBlockBonus effect = localplayer.GetSEMan().GetStatusEffect("Health/Block Increase") as SE_HealthBlockBonus;
+                string blockPowerString = $"$item_blockpower: <color=orange>{item.m_shared.m_blockPower}</color> <color=yellow>({item.m_shared.m_blockPower})</color>";
+                var index = tooltip.IndexOf(blockPowerString);
+                if (index > -1)
+                {
+                    var blockBonus = item.m_shared.m_blockPower * (1 + effect.GetBlockPower());
+                    tooltip = tooltip.Insert(index + blockPowerString.Length, $" <color=orange>|</color> <color=cyan>({blockBonus:#.##})</color>");
+                }
+                else
+                {
+                    blockPowerString = $"$item_blockpower: <color=orange>{item.m_shared.m_blockPower}</color>";
+                    index = tooltip.IndexOf(blockPowerString);
+                    if (index > -1)
+                    {
+                        var blockBonus = item.m_shared.m_blockPower * (1 + effect.GetBlockPower());
+                        tooltip = tooltip.Insert(index + blockPowerString.Length, $" <color=orange>|</color> <color=cyan>({blockBonus:#.##})</color>");
+                    }
+                }
+            }
         }
 
         public static void UpdateDamageTooltip(ref string tooltip, ItemDrop.ItemData item)
@@ -103,6 +124,12 @@ namespace Terraheim.Patches
                 totalMultiplier += effect.getDamageBonus();
             }
 
+            if (seman.HaveStatusEffect("Fist Damage Bonus") && item.m_shared.m_name.ToLower().Contains("fist"))
+            {
+                var effect = localplayer.GetSEMan().GetStatusEffect("Fist Damage Bonus") as SE_FistDamageBonus;
+                totalMultiplier += effect.getDamageBonus();
+            }
+
             if (seman.HaveStatusEffect("Melee Damage Bonus") && item.m_shared.m_itemType != ItemDrop.ItemData.ItemType.Bow)
             {
                 var effect = localplayer.GetSEMan().GetStatusEffect("Melee Damage Bonus") as SE_MeleeDamageBonus;
@@ -127,11 +154,17 @@ namespace Terraheim.Patches
                 totalMultiplier += effect.GetDamageBonus();
             }
 
-            if (seman.HaveStatusEffect("Throwing Damage Bonus") && item.m_shared.m_name.Contains("_throwingaxe") ||
+            if (seman.HaveStatusEffect("Blunt Arrows") && (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow))
+            {
+                var effect = localplayer.GetSEMan().GetStatusEffect("Blunt Arrows") as SE_BluntArrows;
+                totalMultiplier += effect.GetDamageBonus();
+            }
+
+            if (seman.HaveStatusEffect("Throwing Weapon Bonus") && item.m_shared.m_name.Contains("_throwingaxe") ||
                 item.m_shared.m_name.Contains("_spear") ||
                 item.m_shared.m_name.Contains("bomb"))
             {
-                var effect = seman.GetStatusEffect("Throwing Damage Bonus") as SE_ThrowingDamageBonus;
+                var effect = seman.GetStatusEffect("Throwing Weapon Bonus") as SE_ThrowingWeaponBonus;
                 if(effect != null)
                     totalMultiplier += effect.getDamageBonus();
             }
@@ -153,6 +186,11 @@ namespace Terraheim.Patches
                 var effect = localplayer.GetSEMan().GetStatusEffect("Silver Damage Bonus") as SE_SilverDamageBonus;
                 spiritDamage += (item.GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
                 frostDamage += (item.GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
+            }
+            if (seman.HaveStatusEffect("Lightning Damage Bonus") && (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow || item.m_shared.m_name.Contains("spear") || item.m_shared.m_name.Contains("knife")))
+            {
+                var effect = localplayer.GetSEMan().GetStatusEffect("Silver Damage Bonus") as SE_LightningDamageBonus;
+                lightningDamage += item.GetDamage().GetTotalDamage() * effect.GetDamageBonus();
             }
             if (seman.HaveStatusEffect("Frost/Lightning Damage Bonus"))
             {

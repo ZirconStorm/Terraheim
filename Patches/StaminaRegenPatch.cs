@@ -18,6 +18,7 @@ namespace Terraheim.Patches
                 SE_ChallengeSprinter effect = __instance.GetStatusEffect("Sprinter") as SE_ChallengeSprinter;
                 staminaMultiplier += effect.GetRegen();
             }
+            
         }
     }
 }

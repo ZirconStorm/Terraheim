@@ -20,6 +20,9 @@ namespace Terraheim.Patches
         public static void Prefix(ref Attack __instance, Humanoid character, ref ItemDrop.ItemData weapon)
         {
             //Log.LogWarning("Attack Start lol");
+            //Log.LogMessage(weapon.m_shared.m_itemType);
+            //Log.LogMessage(weapon.m_shared.m_name);
+
             if ((character.m_unarmedWeapon && weapon == character?.m_unarmedWeapon.m_itemData) || (weapon.m_dropPrefab == null || weapon.m_dropPrefab.name == null))
             {
                           //Log.LogWarning(89);
@@ -42,6 +45,8 @@ namespace Terraheim.Patches
             weapon.m_shared.m_backstabBonus = baseWeapon.m_itemData.m_shared.m_backstabBonus;
             weapon.m_shared.m_damages.m_frost = baseWeapon.m_itemData.m_shared.m_damages.m_frost;
             weapon.m_shared.m_damages.m_spirit = baseWeapon.m_itemData.m_shared.m_damages.m_spirit;
+            weapon.m_shared.m_damages.m_lightning = baseWeapon.m_itemData.m_shared.m_damages.m_lightning;
+            weapon.m_shared.m_damages.m_blunt = baseWeapon.m_itemData.m_shared.m_damages.m_blunt;
             weapon.m_shared.m_damages.m_damage = baseWeapon.m_itemData.m_shared.m_damages.m_damage;
             weapon.m_shared.m_attack.m_damageMultiplier = baseWeapon.m_itemData.m_shared.m_attack.m_damageMultiplier;
             //Bow Damage Effect
@@ -79,16 +84,17 @@ namespace Terraheim.Patches
             }
 
             //Throwing Damage Effect
-            //Log.LogWarning(5);
+            Log.LogWarning(5);
             if (weapon.m_shared.m_name.Contains("_throwingaxe") || 
                 (weapon.m_shared.m_name.Contains("_spear") && __instance.m_attackAnimation == weapon.m_shared.m_secondaryAttack.m_attackAnimation) ||
                 weapon.m_shared.m_name.Contains("bomb"))
             {
-                if (character.GetSEMan().HaveStatusEffect("Throwing Damage Bonus"))
+                if (character.GetSEMan().HaveStatusEffect("Throwing Weapon Bonus"))
                 {
-                    SE_ThrowingDamageBonus effect = character.GetSEMan().GetStatusEffect("Throwing Damage Bonus") as SE_ThrowingDamageBonus;
+                    SE_ThrowingWeaponBonus effect = character.GetSEMan().GetStatusEffect("Throwing Weapon Bonus") as SE_ThrowingWeaponBonus;
+                    Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
                     weapon.m_shared.m_attack.m_damageMultiplier += effect.getDamageBonus();
-                    //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
+                    Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
                 }
                 if (character.GetSEMan().HaveStatusEffect("Death Mark"))
                 {
@@ -116,7 +122,21 @@ namespace Terraheim.Patches
                 }
             }
 
-           // Log.LogWarning(7);
+            Log.LogWarning(6);
+            //Fist-based Damage Effect
+            if (weapon.m_shared.m_name.ToLower().Contains("fist"))
+            {
+                Log.LogMessage($"Fist-based weapon detected... is: {weapon.m_shared.m_name}");
+                if (character.GetSEMan().HaveStatusEffect("Fist Damage Bonus"))
+                {
+                    Log.LogMessage($"Before: {weapon.m_shared.m_attack.m_damageMultiplier}");
+                    SE_FistDamageBonus effect = character.GetSEMan().GetStatusEffect("Fist Damage Bonus") as SE_FistDamageBonus;
+                    weapon.m_shared.m_attack.m_damageMultiplier += effect.getDamageBonus();
+                    Log.LogMessage($"After: {weapon.m_shared.m_attack.m_damageMultiplier}");
+                }
+            }
+
+            // Log.LogWarning(7);
             //One Hand Damage Effect
             if (weapon.m_shared.m_itemType != ItemDrop.ItemData.ItemType.TwoHandedWeapon && character.GetLeftItem() == null)
             {
@@ -216,6 +236,39 @@ namespace Terraheim.Patches
                 weapon.m_shared.m_backstabBonus = baseWeapon.m_itemData.m_shared.m_backstabBonus + effect.getBackstabBonus();
             }
 
+            Log.LogWarning(112);
+            //Lightning Damage Bonus Effect
+            weapon.m_shared.m_damages.m_lightning = baseWeapon.m_itemData.m_shared.m_damages.m_lightning;
+            if (weapon.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow || weapon.m_shared.m_name.Contains("spear") || weapon.m_shared.m_name.Contains("knife"))
+            {
+                if (character.GetSEMan().HaveStatusEffect("Lightning Damage Bonus"))
+                {
+                    SE_LightningDamageBonus effect = character.GetSEMan().GetStatusEffect("Lightning Damage Bonus") as SE_LightningDamageBonus;
+
+                    var totalDamage = weapon.GetDamage().GetTotalDamage();
+                    var elementDamage = totalDamage * effect.GetDamageBonus();
+                    weapon.m_shared.m_damages.m_lightning += elementDamage;
+                    Log.LogMessage("elemental damage " + elementDamage);
+                    Log.LogMessage("weapon Element damage " + weapon.m_shared.m_damages.m_lightning);
+                }
+            }
+
+            //Log.LogWarning(115);
+            //Frost & Lightning Damage Bonus Effect
+            weapon.m_shared.m_damages.m_frost = baseWeapon.m_itemData.m_shared.m_damages.m_frost;
+            weapon.m_shared.m_damages.m_lightning = baseWeapon.m_itemData.m_shared.m_damages.m_lightning;
+            if (character.GetSEMan().HaveStatusEffect("Frost/Lightning Damage Bonus"))
+            {
+                SE_FrostLightningDamageBonus effect = character.GetSEMan().GetStatusEffect("Frost/Lightning Damage Bonus") as SE_FrostLightningDamageBonus;
+
+                var totalDamage = weapon.GetDamage().GetTotalDamage();
+                var elementDamage = (totalDamage * effect.GetDamageBonus()) / 2;
+                weapon.m_shared.m_damages.m_frost += elementDamage;
+                weapon.m_shared.m_damages.m_lightning += elementDamage;
+                Log.LogMessage("elemental damage " + elementDamage);
+                Log.LogMessage("weapon Element damage " + weapon.m_shared.m_damages.m_frost + ", " + weapon.m_shared.m_damages.m_lightning);
+            }
+
             //Log.LogWarning(12);
             //Silver Damage Bonus Effect
             weapon.m_shared.m_damages.m_spirit = baseWeapon.m_itemData.m_shared.m_damages.m_spirit;
@@ -253,22 +306,6 @@ namespace Terraheim.Patches
                 SE_SpiritDamageBonus effect = character.GetSEMan().GetStatusEffect("Spirit Damage Bonus") as SE_SpiritDamageBonus;
                 weapon.m_shared.m_damages.m_spirit += effect.GetDamageBonus();
                 //Log.LogMessage("weapon spirit damage " + weapon.m_shared.m_damages.m_spirit);
-            }
-
-            Log.LogWarning(12);
-            //Frost & Lightning Damage Bonus Effect
-            weapon.m_shared.m_damages.m_frost = baseWeapon.m_itemData.m_shared.m_damages.m_frost;
-            weapon.m_shared.m_damages.m_lightning = baseWeapon.m_itemData.m_shared.m_damages.m_lightning;
-            if (character.GetSEMan().HaveStatusEffect("Frost/Lightning Damage Bonus"))
-            {
-                SE_FrostLightningDamageBonus effect = character.GetSEMan().GetStatusEffect("Frost/Lightning Damage Bonus") as SE_FrostLightningDamageBonus;
-
-                var totalDamage = weapon.GetDamage().GetTotalDamage();
-                var elementDamage = (totalDamage * effect.GetDamageBonus()) / 2;
-                weapon.m_shared.m_damages.m_frost += elementDamage;
-                weapon.m_shared.m_damages.m_lightning += elementDamage;
-                Log.LogMessage("elemental damage " + elementDamage);
-                Log.LogMessage("weapon Element damage " + weapon.m_shared.m_damages.m_frost + ", " + weapon.m_shared.m_damages.m_lightning);
             }
 
             //Log.LogWarning(15);
@@ -425,6 +462,39 @@ namespace Terraheim.Patches
                     __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
                 }
             }
+            else if (__instance.m_character.GetSEMan().HaveStatusEffect("Wyrdarrow2FX"))
+            {
+                Log.LogInfo("Has SE Wyrdarrow2FX");
+                var effect = __instance.m_character.GetSEMan().GetStatusEffect("Wyrdarrow2") as SE_BowAoECounter;
+
+                AssetHelper.TestExplosion.GetComponent<Aoe>().m_radius = effect.GetAoESize();
+                if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow)
+                {
+                    var damageBonus = (__instance.GetWeapon().GetDamage().GetTotalDamage() + __instance.m_ammoItem.m_shared.m_damages.GetTotalDamage()
+                        * effect.GetDamageBonus()) / 2;
+                    Log.LogMessage(__instance.GetWeapon().m_shared.m_name);
+                    if (__instance.GetWeapon().m_shared.m_name.Contains("bow_fireTH"))
+                    {
+                        AssetHelper.FlamebowWyrdExplosion.GetComponent<Aoe>().m_damage.m_spirit = damageBonus;
+                        AssetHelper.FlamebowWyrdExplosion.GetComponent<Aoe>().m_damage.m_frost = damageBonus;
+
+                        Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " frost and " + damageBonus + " spirit damage.");
+
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.FlamebowWyrdExplosion;
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                    }
+                    else
+                    {
+                        AssetHelper.TestExplosion.GetComponent<Aoe>().m_damage.m_spirit = damageBonus;
+                        AssetHelper.TestExplosion.GetComponent<Aoe>().m_damage.m_frost = damageBonus;
+
+                        Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " frost and " + damageBonus + " spirit damage.");
+
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.TestExplosion;
+                        __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                    }
+                }
+            }
             else if (__instance.m_character.IsPlayer() && __instance.GetWeapon().m_shared.m_name.Contains("bow_fireTH"))
             {
                 JObject balance = UtilityFunctions.GetJsonFromFile("weaponBalance.json");
@@ -446,12 +516,13 @@ namespace Terraheim.Patches
                 }
                 
             }
-            if (__instance.m_character.GetSEMan().HaveStatusEffect("Throwing Weapon Velocity"))
+            if (__instance.m_character.GetSEMan().HaveStatusEffect("Throwing Weapon Bonus"))
             {
                 if (__instance.GetWeapon().m_shared.m_name.Contains("_throwingaxe"))
                 {
-                    //Log.LogInfo(__instance.m_projectileVel);
-                    __instance.m_projectileVel += __instance.m_projectileVel * (1 + (__instance.m_character.GetSEMan().GetStatusEffect("Throwing Weapon Velocity") as SE_ThrowingWeaponVelocity).GetVelocityBonus());
+                    Log.LogInfo(__instance.m_projectileVel);
+                    __instance.m_projectileVel += __instance.m_projectileVel * (1 + (__instance.m_character.GetSEMan().GetStatusEffect("Throwing Weapon Bonus") as SE_ThrowingWeaponBonus).getDamageBonus());
+                    Log.LogInfo(__instance.m_projectileVel);
                 }
                 
 
@@ -477,6 +548,22 @@ namespace Terraheim.Patches
                 if (__instance.m_character.GetSEMan().HaveStatusEffect("WyrdarrowFX"))
                 {
                     var effect = __instance.m_character.GetSEMan().GetStatusEffect("Wyrdarrow") as SE_AoECounter;
+                    effect.ClearCounter();
+                }
+            }
+            else if (__instance.m_character.GetSEMan().HaveStatusEffect("Wyrdarrow2"))
+            {
+                Log.LogInfo("FireProjectileThingy");
+                if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow && __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit == AssetHelper.TestExplosion)
+                {
+                    Log.LogInfo("first if");
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = null;
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 0;
+                }
+                if (__instance.m_character.GetSEMan().HaveStatusEffect("Wyrdarrow2FX"))
+                {
+                    Log.LogInfo("second if");
+                    var effect = __instance.m_character.GetSEMan().GetStatusEffect("Wyrdarrow2") as SE_BowAoECounter;
                     effect.ClearCounter();
                 }
             }

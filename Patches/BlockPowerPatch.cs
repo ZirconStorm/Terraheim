@@ -28,6 +28,14 @@ namespace Terraheim.Patches
                 __instance.GetCurrentBlocker().m_shared.m_timedBlockBonus = baseWeapon.m_itemData.m_shared.m_timedBlockBonus * (1 + effect.GetParryBonus());
                 Log.LogWarning("Human " + __instance.GetCurrentBlocker().m_shared.m_timedBlockBonus);
             }
+            if (__instance.IsPlayer() && __instance.GetSEMan().HaveStatusEffect("Health/Block Increase") && __instance.GetCurrentWeapon() != __instance.m_unarmedWeapon.m_itemData)
+            {
+                SE_HealthBlockBonus effect = __instance.GetSEMan().GetStatusEffect("Health/Block Increase") as SE_HealthBlockBonus;
+                //Log.LogWarning("Human " + __instance.GetCurrentBlocker().m_shared.m_blockPower);
+                var baseWeapon = PrefabManager.Cache.GetPrefab<ItemDrop>(__instance.GetCurrentBlocker().m_dropPrefab.name);
+                __instance.GetCurrentBlocker().m_shared.m_blockPower = baseWeapon.m_itemData.m_shared.m_blockPower * (1 + effect.GetBlockPower());
+                //Log.LogWarning("Human " + __instance.GetCurrentBlocker().m_shared.m_blockPower);
+            }
         }
     }
 }

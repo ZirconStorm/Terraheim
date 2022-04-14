@@ -307,18 +307,47 @@ namespace Terraheim.Patches
 
             if (attacker.GetSEMan().HaveStatusEffect("Frost/Lightning Vulnerable"))
             {
-                Log.LogMessage("Checking if weak...");
                 if (UtilityFunctions.CheckIfVulnerable(__instance, hit))
                 {
-                    Log.LogMessage("AM WEAK AHHHHHHHHHHHHHHHHHHHHHH");
-                    var effect = attacker.GetSEMan().GetStatusEffect("Frost/Lightning Vulnerable") as SE_ForstLightningVulnerable;
+                    var effect = attacker.GetSEMan().GetStatusEffect("Frost/Lightning Vulnerable") as SE_FrostLightningVulnerable;
 
                     var totalDamage = hit.GetTotalDamage();
                     var elementDamage = (totalDamage * effect.GetDamageBonus()) / 2;
                     __instance.AddFrostDamage(elementDamage);
-                    __instance.AddFrostDamage(elementDamage);
-                    Log.LogMessage("elemental damage " + elementDamage);
-                    Log.LogInfo($"damage {hit.GetTotalDamage()}");
+                    __instance.AddLightningDamage(elementDamage);
+                    Log.LogMessage("frost on hit: " + hit.m_damage.m_frost);
+                    Log.LogMessage("light on hit: " + hit.m_damage.m_lightning);
+                    //Log.LogMessage("elemental damage " + elementDamage);
+                    //Log.LogInfo($"damage {hit.GetTotalDamage()}");
+                }
+            }
+
+            Log.LogWarning(13);
+            //Add Blunt damage to arrows
+            if (attacker.GetSEMan().HaveStatusEffect("Blunt Arrows"))
+            {
+                if (hit.m_ranged == true)
+                {
+                    var effect = attacker.GetSEMan().GetStatusEffect("Blunt Arrows") as SE_BluntArrows;
+                    var totalDamage = hit.GetTotalDamage();
+                    var bluntDamage = totalDamage * effect.GetDamageBonus();
+                    hit.m_damage.m_blunt += bluntDamage;
+                    Log.LogMessage("arrow blunt damage on hit" + hit.m_damage.m_blunt);
+                }
+            }
+
+            Log.LogWarning(14);
+            //Lightning Ranger
+            if (attacker.GetSEMan().HaveStatusEffect("Lightning Damage Bonus"))
+            {
+                if (hit.m_ranged == true)
+                {
+                    var effect = attacker.GetSEMan().GetStatusEffect("Lightning Damage Bonus") as SE_LightningDamageBonus;
+                    var totalDamage = hit.GetTotalDamage();
+                    var lightningDamage = totalDamage * effect.GetDamageBonus();
+                    hit.m_damage.m_lightning += lightningDamage;
+                    __instance.AddLightningDamage(lightningDamage);
+                    Log.LogMessage("light on hit: " + hit.m_damage.m_lightning);
                 }
             }
 
@@ -438,6 +467,10 @@ namespace Terraheim.Patches
             if (hit.HaveAttacker() && hit.GetAttacker().IsPlayer() && hit.GetAttacker().GetSEMan().HaveStatusEffect("Wyrdarrow"))
             {
                 (hit.GetAttacker().GetSEMan().GetStatusEffect("Wyrdarrow") as SE_AoECounter).IncreaseCounter();
+            }
+            if (hit.HaveAttacker() && hit.GetAttacker().IsPlayer() && hit.GetAttacker().GetSEMan().HaveStatusEffect("Wyrdarrow2"))
+            {
+                (hit.GetAttacker().GetSEMan().GetStatusEffect("Wyrdarrow2") as SE_BowAoECounter).IncreaseCounter();
             }
             if (hit.HaveAttacker() && hit.GetAttacker().IsPlayer() && hit.GetAttacker().GetSEMan().HaveStatusEffect("Brassflesh Listener"))
             {

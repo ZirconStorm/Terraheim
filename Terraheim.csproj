@@ -47,34 +47,6 @@
     <Reference Include="JudesEquipment">
       <HintPath>D:\ValheimModding\references\JudesEquipment.dll</HintPath>
     </Reference>
-    <Reference Include="MMHOOK_assembly_googleanalytics">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_googleanalytics.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_guiutils">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_guiutils.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_lux">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_lux.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_postprocessing">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_postprocessing.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_simplemeshcombine">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_simplemeshcombine.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_steamworks">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_steamworks.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_sunshafts">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_sunshafts.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_utils">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_utils.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_assembly_valheim, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\MMHOOK\MMHOOK_assembly_valheim.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -127,19 +99,25 @@
     <Compile Include="ArmorEffects\ChosenEffects\SE_Withdrawals.cs" />
     <Compile Include="ArmorEffects\SE_Afterburn.cs" />
     <Compile Include="ArmorEffects\SE_AfterburnCooldown.cs" />
+    <Compile Include="ArmorEffects\SE_BowAoECounterExhausted.cs" />
+    <Compile Include="ArmorEffects\SE_BowAoECounterFX.cs" />
+    <Compile Include="ArmorEffects\SE_BowAoECounter.cs" />
     <Compile Include="ArmorEffects\SE_AoECounterExhausted.cs" />
     <Compile Include="ArmorEffects\SE_AoECounterFX.cs" />
     <Compile Include="ArmorEffects\SE_AoECounter.cs" />
     <Compile Include="ArmorEffects\SE_ArmorOnHit.cs" />
     <Compile Include="ArmorEffects\SE_ArmorOnHitListener.cs" />
+    <Compile Include="ArmorEffects\SE_BluntArrows.cs" />
     <Compile Include="ArmorEffects\SE_ChallengeDodgeBonus.cs" />
     <Compile Include="ArmorEffects\SE_ChallengeMoveSpeed.cs" />
     <Compile Include="ArmorEffects\SE_ChallengeSprinter.cs" />
     <Compile Include="ArmorEffects\SE_CoinDrop.cs" />
+    <Compile Include="ArmorEffects\SE_FistBonus.cs" />
     <Compile Include="ArmorEffects\SE_DamageVsLowHP.cs" />
     <Compile Include="ArmorEffects\SE_DeathMark.cs" />
     <Compile Include="ArmorEffects\SE_FullHPDamageBonusFX.cs" />
     <Compile Include="ArmorEffects\SE_HealOnBlock.cs" />
+    <Compile Include="ArmorEffects\SE_HealthBlockBonus.cs" />
     <Compile Include="ArmorEffects\SE_Hyperarmor.cs" />
     <Compile Include="ArmorEffects\SE_IncreaseHarvest.cs" />
     <Compile Include="ArmorEffects\SE_MarkedForDeath.cs" />
@@ -153,7 +131,7 @@
     <Compile Include="ArmorEffects\SE_Pinned.cs" />
     <Compile Include="ArmorEffects\SE_PinnedCooldown.cs" />
     <Compile Include="ArmorEffects\SE_Pinning.cs" />
-    <Compile Include="ArmorEffects\SE_ForstLightningVulnerable.cs" />
+    <Compile Include="ArmorEffects\SE_FrostLightningVulnerable.cs" />
     <Compile Include="ArmorEffects\SE_PoisonVulnerable.cs" />
     <Compile Include="ArmorEffects\SE_RangerWeaponBonus.cs" />
     <Compile Include="ArmorEffects\SE_RestoreResources.cs" />
@@ -163,9 +141,12 @@
     <Compile Include="ArmorEffects\SE_ShieldFireListener.cs" />
     <Compile Include="ArmorEffects\SE_ShieldFireParryListener.cs" />
     <Compile Include="ArmorEffects\SE_FrostLightningDamageBonus.cs" />
+    <Compile Include="ArmorEffects\SE_LightningDamageBonus.cs" />
     <Compile Include="ArmorEffects\SE_SneakMovement.cs" />
     <Compile Include="ArmorEffects\SE_StaggerCapacity.cs" />
     <Compile Include="ArmorEffects\SE_StaggerDamage.cs" />
+    <Compile Include="ArmorEffects\SE_ThornsFire.cs" />
+    <Compile Include="ArmorEffects\SE_ThornsFrost.cs" />
     <Compile Include="ArmorEffects\SE_ThrowingDamageBonus.cs" />
     <Compile Include="ArmorEffects\SE_ThrowingWeaponVelocity.cs" />
     <Compile Include="ArmorEffects\SE_TreeDamageBonus.cs" />
@@ -249,7 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JotunnLib">
-      <Version>2.6.0</Version>
+      <Version>2.6.2</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>

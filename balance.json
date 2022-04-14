@@ -373,48 +373,48 @@
             }
         }
     },
-    "silver": {
-        "enabled": true,
-        "name": "wyrdwulf",
-        "baseArmor": 18,
+  "silver": {
+    "enabled": true,
+    "name": "wyrdwulf",
+    "baseArmor": 18,
+    "armorPerLevel": 2,
+    "globalMoveMod": 0,
+    "setEffect": "wyrdarrow2",
+    "headEffect": "frostningvuln",
+    "chestEffect": "firethorns",
+    "legsEffect": "healthblockbns",
+    "setBonusVal": 1,
+    "setActivationCount": 0,
+    "setAoESize": 4,
+    "headEffectVal": 0.08,
+    "chestEffectVal": 13,
+    "legsEffectVal": 0.15,
+    "upgrades": {
+      "startingTier": 5,
+      "t5": {
+        "baseArmor": 22,
         "armorPerLevel": 2,
         "globalMoveMod": 0,
-        "setEffect": "wyrdarrow",
-        "headEffect": "frostningdmg",
-        "chestEffect": "frostningvuln",
-        "legsEffect": "drawmovespeed",
-        "setBonusVal": 1,
-        "setActivationCount": 6,
-        "setAoESize": 1.5,
-        "headEffectVal": 0.08,
-        "chestEffectVal": 13,
-        "legsEffectVal": 0.15,
-        "upgrades": {
-            "startingTier": 5,
-            "t5": {
-                "baseArmor": 22,
-                "armorPerLevel": 2,
-                "globalMoveMod": 0,
-                "setBonusVal": 1.5,
-                "setActivationCount": 4,
-                "setAoESize": 2,
-                "headEffectVal": 0.1,
-                "chestEffectVal": 0.5,
-                "legsEffectVal": 0.25
-            },
-            "t6": {
-                "baseArmor": 26,
-                "armorPerLevel": 2,
-                "globalMoveMod": 0,
-                "setBonusVal": 1.7,
-                "setActivationCount": 4,
-                "setAoESize": 2,
-                "headEffectVal": 0.12,
-                "chestEffectVal": 0.5,
-                "legsEffectVal": 0.28
-            }
-        }
-    },
+        "setBonusVal": 1.5,
+        "setActivationCount": 4,
+        "setAoESize": 2,
+        "headEffectVal": 0.1,
+        "chestEffectVal": 0.5,
+        "legsEffectVal": 0.25
+      },
+      "t6": {
+        "baseArmor": 26,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "setBonusVal": 1.7,
+        "setActivationCount": 4,
+        "setAoESize": 2,
+        "headEffectVal": 0.12,
+        "chestEffectVal": 0.5,
+        "legsEffectVal": 0.28
+      }
+    }
+  },
     "padded": {
         "enabled": true,
         "name": "huscarl",
