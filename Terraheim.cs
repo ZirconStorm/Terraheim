@@ -204,6 +204,9 @@ namespace Terraheim
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_DeathMark>(), fixReference: true)); //Barbarian
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_MarkedForDeath>(), fixReference: true)); //Barbarian
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_MarkedForDeathFX>(), fixReference: true)); //Barbarian
+            ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_BowDeathMark>(), fixReference: true)); //Troll
+            ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_BowMarkedForDeath>(), fixReference: true)); //Troll
+            ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_BowMarkedForDeathFX>(), fixReference: true)); //Troll
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_Mercenary>(), fixReference: true)); //Barbarian
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_Retaliation>(), fixReference: true)); //Barbarian
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_RetaliationTimer>(), fixReference: true)); //Barbarian

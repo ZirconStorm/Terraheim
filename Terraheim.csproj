@@ -99,6 +99,7 @@
     <Compile Include="ArmorEffects\ChosenEffects\SE_Withdrawals.cs" />
     <Compile Include="ArmorEffects\SE_Afterburn.cs" />
     <Compile Include="ArmorEffects\SE_AfterburnCooldown.cs" />
+    <Compile Include="ArmorEffects\SE_BowDeathMark.cs" />
     <Compile Include="ArmorEffects\SE_FireAoECounter.cs" />
     <Compile Include="ArmorEffects\SE_LightningAoECounter.cs" />
     <Compile Include="ArmorEffects\SE_FireAoECounterExhausted.cs" />
@@ -126,7 +127,9 @@
     <Compile Include="ArmorEffects\SE_HealthBlockBonus.cs" />
     <Compile Include="ArmorEffects\SE_Hyperarmor.cs" />
     <Compile Include="ArmorEffects\SE_IncreaseHarvest.cs" />
+    <Compile Include="ArmorEffects\SE_BowMarkedForDeath.cs" />
     <Compile Include="ArmorEffects\SE_MarkedForDeath.cs" />
+    <Compile Include="ArmorEffects\SE_BowMarkedForDeathFX.cs" />
     <Compile Include="ArmorEffects\SE_MarkedForDeathFX.cs" />
     <Compile Include="ArmorEffects\SE_Mercenary.cs" />
     <Compile Include="ArmorEffects\SE_MiningBonus.cs" />

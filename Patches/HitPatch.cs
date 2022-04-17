@@ -168,7 +168,97 @@ namespace Terraheim.Patches
 
             }
 
+            //Marked for Death - Bow
+            if (__instance.GetSEMan().HaveStatusEffect("Bow Marked For Death FX"))
+            {
+                Log.LogWarning(1001);
+                var effect = __instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath;
+                hit.m_damage.m_blunt += hit.m_damage.m_blunt * effect.GetDamageBonus();
+                hit.m_damage.m_chop += hit.m_damage.m_chop * effect.GetDamageBonus();
+                hit.m_damage.m_damage += hit.m_damage.m_damage * effect.GetDamageBonus();
+                hit.m_damage.m_fire += hit.m_damage.m_fire * effect.GetDamageBonus();
+                hit.m_damage.m_frost += hit.m_damage.m_frost * effect.GetDamageBonus();
+                hit.m_damage.m_lightning += hit.m_damage.m_lightning * effect.GetDamageBonus();
+                hit.m_damage.m_pickaxe += hit.m_damage.m_pickaxe * effect.GetDamageBonus();
+                hit.m_damage.m_pierce += hit.m_damage.m_pierce * effect.GetDamageBonus();
+                hit.m_damage.m_poison += hit.m_damage.m_poison * effect.GetDamageBonus();
+                hit.m_damage.m_slash += hit.m_damage.m_slash * effect.GetDamageBonus();
+                hit.m_damage.m_spirit += hit.m_damage.m_spirit * effect.GetDamageBonus();
+
+
+                effect.DecreaseHitsRemaining();
+
+                Log.LogWarning(1002);
+                if ((bool)balance["enableMarkedForDeathFXBow"])
+                {
+                    Log.LogWarning(1003);
+                    var executionVFX = Object.Instantiate(AssetHelper.FXMarkedForDeathHit, __instance.GetCenterPoint(), Quaternion.identity);
+                    ParticleSystem[] children = executionVFX.GetComponentsInChildren<ParticleSystem>();
+                    foreach (ParticleSystem particle in children)
+                    {
+                        particle.Play();
+                    }
+                }
+
+                Log.LogWarning(1004);
+                var audioSource = hit.GetAttacker().GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    Log.LogWarning(1005);
+                    audioSource = hit.GetAttacker().gameObject.AddComponent<AudioSource>();
+                    audioSource.playOnAwake = false;
+                }
+                Log.LogWarning(1006);
+                audioSource.PlayOneShot(AssetHelper.SFXExecution);
+            }
+            Log.LogWarning(1011);
+            if (hit.m_statusEffect == "Bow Marked For Death" && !__instance.GetSEMan().HaveStatusEffect("Bow Marked For Death FX"))
+            {
+                __instance.GetSEMan().AddStatusEffect("Bow Marked For Death FX");
+            }
+            Log.LogWarning(1021);
+            if (attacker.GetSEMan().HaveStatusEffect("Bow Death Mark"))
+            {
+                Log.LogWarning(1022);
+                var effect = hit.GetAttacker().GetSEMan().GetStatusEffect("Bow Death Mark") as SE_BowDeathMark;
+
+                Log.LogWarning(1023);
+                if (!__instance.GetSEMan().HaveStatusEffect("Marked For Death FX"))
+                {
+                    Log.LogWarning(1024);
+                    //Log.LogInfo(effect.GetLastHitThrowing());
+                    if (__instance.GetSEMan().HaveStatusEffect("Bow Marked For Death") && effect.GetLastHitBow())
+                    {
+                        Log.LogWarning(1025);
+                        //increase counter
+                        (__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).IncreaseCounter();
+                        //Log.LogMessage($"Death Mark Counter : {(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).m_count}");
+                    }
+                    else if (effect.GetLastHitBow())
+                    {
+                        Log.LogWarning(1026);
+                        Log.LogMessage("Adding Death Mark");
+                        //add marked for death counter
+                        __instance.GetSEMan().AddStatusEffect("Bow Marked For Death");
+                        Log.LogWarning(10261);
+                        //(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).IncreaseCounter();
+                        Log.LogWarning(10262);
+                        (__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).SetActivationCount(effect.GetThreshold());
+                        Log.LogWarning(10263); 
+                        (__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).SetDamageBonus(effect.GetDamageBonus());
+                        Log.LogWarning(10264); 
+                        (__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).SetHitDuration(effect.GetHitDuration());
+                        Log.LogInfo($"Death Mark Counter : {(__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).m_count}, " +
+                        $"Activation: {(__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).GetActivationCount()} " +
+                        $"Damage Bonus: {(__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).GetDamageBonus()} " +
+                        $"Hit Amount: {(__instance.GetSEMan().GetStatusEffect("Bow Marked For Death") as SE_BowMarkedForDeath).GetHitDuration()}");
+                    }
+                }
+                Log.LogWarning(1029);
+            }
+
             //Bloodrush
+            Log.LogWarning(131);
             if (__instance.GetHealth() <= hit.GetTotalDamage() && attacker.GetSEMan().HaveStatusEffect("Bloodrush Listener"))
             {
                 if (attacker.GetSEMan().HaveStatusEffect("Bloodrush"))
@@ -182,7 +272,8 @@ namespace Terraheim.Patches
                 }
             }
 
-            if(__instance.GetHealth() <= hit.GetTotalDamage() && (attacker as Player).GetCurrentBlocker().m_shared.m_name.Contains("_shield_fire_tower"))
+            Log.LogWarning(132);
+            if (__instance.GetHealth() <= hit.GetTotalDamage() && (attacker as Player).GetCurrentBlocker().m_shared.m_name.Contains("_shield_fire_tower"))
             {
                 SE_ShieldFireListener effect = attacker.GetSEMan().GetStatusEffect("Svalinn") as SE_ShieldFireListener;
                 float hpToHeal = effect.OnKill(__instance.GetMaxHealth());
@@ -206,6 +297,7 @@ namespace Terraheim.Patches
             }
 
             //Chosen
+            Log.LogWarning(133);
             if (attacker.GetSEMan().HaveStatusEffect("Chosen"))
             {
                 //Log.LogInfo(__instance.m_name);
@@ -221,6 +313,7 @@ namespace Terraheim.Patches
                 }
             }
 
+            Log.LogWarning(134);
             if (attacker.GetSEMan().HaveStatusEffect("Bloodlust"))
             {
                 SE_Bloodlust effect = attacker.GetSEMan().GetStatusEffect("Bloodlust") as SE_Bloodlust;
@@ -257,7 +350,8 @@ namespace Terraheim.Patches
                 }
             }
 
-            if(attacker.GetSEMan().HaveStatusEffect("Maddening Visions") && (attacker.GetSEMan().GetStatusEffect("Maddening Visions") as SE_MaddeningVisions).IsActive())
+            Log.LogWarning(135);
+            if (attacker.GetSEMan().HaveStatusEffect("Maddening Visions") && (attacker.GetSEMan().GetStatusEffect("Maddening Visions") as SE_MaddeningVisions).IsActive())
             {
                 float modifier;
                 if((attacker as Player).GetCurrentWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow)
@@ -282,7 +376,9 @@ namespace Terraheim.Patches
                 hit.m_damage.m_slash -= hit.m_damage.m_slash * modifier;
                 hit.m_damage.m_spirit -= hit.m_damage.m_spirit * modifier;
             }
+
             //Pinning
+            Log.LogWarning(136);
             if (attacker.GetSEMan().HaveStatusEffect("Pinning") && !__instance.GetSEMan().HaveStatusEffect("Pinned") && !__instance.GetSEMan().HaveStatusEffect("Pinned Cooldown"))
             {
                 if (UtilityFunctions.CheckIfVulnerable(__instance, hit) || (attacker as Player).GetCurrentWeapon().m_shared.m_name.Contains("mace_fire"))
@@ -294,6 +390,7 @@ namespace Terraheim.Patches
                 }
             }
 
+            Log.LogWarning(137);
             if (attacker.GetSEMan().HaveStatusEffect("Poison Vulnerable"))
             {
                 if (UtilityFunctions.CheckIfVulnerable(__instance, hit))
@@ -305,6 +402,7 @@ namespace Terraheim.Patches
                 }
             }
 
+            Log.LogWarning(138);
             if (attacker.GetSEMan().HaveStatusEffect("Frost/Lightning Vulnerable"))
             {
                 if (UtilityFunctions.CheckIfVulnerable(__instance, hit))

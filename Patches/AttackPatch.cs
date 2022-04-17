@@ -96,24 +96,48 @@ namespace Terraheim.Patches
                 (weapon.m_shared.m_name.Contains("_spear") && __instance.m_attackAnimation == weapon.m_shared.m_secondaryAttack.m_attackAnimation) ||
                 weapon.m_shared.m_name.Contains("bomb"))
             {
+                Log.LogWarning(51);
                 if (character.GetSEMan().HaveStatusEffect("Throwing Weapon Bonus"))
                 {
+                    Log.LogWarning(52);
                     SE_ThrowingWeaponBonus effect = character.GetSEMan().GetStatusEffect("Throwing Weapon Bonus") as SE_ThrowingWeaponBonus;
                     Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
                     weapon.m_shared.m_attack.m_damageMultiplier += effect.getDamageBonus();
                     Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
                 }
+                Log.LogWarning(53);
                 if (character.GetSEMan().HaveStatusEffect("Death Mark"))
                 {
-                     (character.GetSEMan().GetStatusEffect("Death Mark") as SE_DeathMark).SetLastHitThrowing(true);
+                    Log.LogWarning(54);
+                    (character.GetSEMan().GetStatusEffect("Death Mark") as SE_DeathMark).SetLastHitThrowing(true);
                     //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
                 }
             }
             else
             {
+                Log.LogWarning(55);
                 if (character.GetSEMan().HaveStatusEffect("Death Mark"))
                 {
+                    Log.LogWarning(56);
                     (character.GetSEMan().GetStatusEffect("Death Mark") as SE_DeathMark).SetLastHitThrowing(false);
+                    //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
+                }
+            }
+
+            Log.LogWarning(555);
+            if (weapon.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow)
+            {
+                if (character.GetSEMan().HaveStatusEffect("Bow Death Mark"))
+                {
+                    (character.GetSEMan().GetStatusEffect("Bow Death Mark") as SE_BowDeathMark).SetLastHitBow(true);
+                    //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
+                }
+            }
+            else
+            {
+                if (character.GetSEMan().HaveStatusEffect("Bow Death Mark"))
+                {
+                    (character.GetSEMan().GetStatusEffect("Bow Death Mark") as SE_BowDeathMark).SetLastHitBow(false);
                     //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
                 }
             }
