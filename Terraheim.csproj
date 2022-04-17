@@ -99,7 +99,10 @@
     <Compile Include="ArmorEffects\ChosenEffects\SE_Withdrawals.cs" />
     <Compile Include="ArmorEffects\SE_Afterburn.cs" />
     <Compile Include="ArmorEffects\SE_AfterburnCooldown.cs" />
+    <Compile Include="ArmorEffects\SE_FistDeathMark.cs" />
     <Compile Include="ArmorEffects\SE_BowDeathMark.cs" />
+    <Compile Include="ArmorEffects\SE_FistMarkedForDeath.cs" />
+    <Compile Include="ArmorEffects\SE_FistMarkedForDeathFX.cs" />
     <Compile Include="ArmorEffects\SE_FireAoECounter.cs" />
     <Compile Include="ArmorEffects\SE_LightningAoECounter.cs" />
     <Compile Include="ArmorEffects\SE_FireAoECounterExhausted.cs" />

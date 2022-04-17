@@ -142,6 +142,24 @@ namespace Terraheim.Patches
                 }
             }
 
+            Log.LogWarning(5555);
+            if (weapon.m_shared.m_name.ToLower().Contains("fist"))
+            {
+                if (character.GetSEMan().HaveStatusEffect("Fist Death Mark"))
+                {
+                    (character.GetSEMan().GetStatusEffect("Fist Death Mark") as SE_FistDeathMark).SetLastHitFist(true);
+                    //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
+                }
+            }
+            else
+            {
+                if (character.GetSEMan().HaveStatusEffect("Fist Death Mark"))
+                {
+                    (character.GetSEMan().GetStatusEffect("Fist Death Mark") as SE_FistDeathMark).SetLastHitFist(false);
+                    //Log.LogMessage("weapon  damage " + weapon.m_shared.m_attack.m_damageMultiplier);
+                }
+            }
+
             //Log.LogWarning(6);
             //Dagger/Spear Damage Effect
             if ((weapon.m_shared.m_name.Contains("spear") || weapon.m_shared.m_name.Contains("knife")))

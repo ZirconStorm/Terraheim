@@ -257,6 +257,86 @@ namespace Terraheim.Patches
                 Log.LogWarning(1029);
             }
 
+            //Marked for Death - Fists
+            if (__instance.GetSEMan().HaveStatusEffect("Fist Marked For Death FX"))
+            {
+                Log.LogWarning(2001);
+                var effect = __instance.GetSEMan().GetStatusEffect("Fist Marked For Death") as SE_FistMarkedForDeath;
+                hit.m_damage.m_blunt += hit.m_damage.m_blunt * effect.GetDamageBonus();
+                hit.m_damage.m_chop += hit.m_damage.m_chop * effect.GetDamageBonus();
+                hit.m_damage.m_damage += hit.m_damage.m_damage * effect.GetDamageBonus();
+                hit.m_damage.m_fire += hit.m_damage.m_fire * effect.GetDamageBonus();
+                hit.m_damage.m_frost += hit.m_damage.m_frost * effect.GetDamageBonus();
+                hit.m_damage.m_lightning += hit.m_damage.m_lightning * effect.GetDamageBonus();
+                hit.m_damage.m_pickaxe += hit.m_damage.m_pickaxe * effect.GetDamageBonus();
+                hit.m_damage.m_pierce += hit.m_damage.m_pierce * effect.GetDamageBonus();
+                hit.m_damage.m_poison += hit.m_damage.m_poison * effect.GetDamageBonus();
+                hit.m_damage.m_slash += hit.m_damage.m_slash * effect.GetDamageBonus();
+                hit.m_damage.m_spirit += hit.m_damage.m_spirit * effect.GetDamageBonus();
+
+                effect.DecreaseHitsRemaining();
+
+                if ((bool)balance["enableMarkedForDeathFXFist"])
+                {
+                    var executionVFX = Object.Instantiate(AssetHelper.FXMarkedForDeathHit, __instance.GetCenterPoint(), Quaternion.identity);
+                    ParticleSystem[] children = executionVFX.GetComponentsInChildren<ParticleSystem>();
+                    foreach (ParticleSystem particle in children)
+                    {
+                        particle.Play();
+                    }
+                }
+
+                var audioSource = hit.GetAttacker().GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = hit.GetAttacker().gameObject.AddComponent<AudioSource>();
+                    audioSource.playOnAwake = false;
+                }
+                audioSource.PlayOneShot(AssetHelper.SFXExecution);
+            }
+            Log.LogWarning(2011);
+            if (hit.m_statusEffect == "Fist Marked For Death" && !__instance.GetSEMan().HaveStatusEffect("Fist Marked For Death FX"))
+            {
+                Log.LogWarning(2012);
+                __instance.GetSEMan().AddStatusEffect("Fist Marked For Death FX");
+            }
+            Log.LogWarning(2021);
+            if (attacker.GetSEMan().HaveStatusEffect("Fist Death Mark"))
+            {
+                Log.LogWarning(2022);
+                var effect = hit.GetAttacker().GetSEMan().GetStatusEffect("Fist Death Mark") as SE_FistDeathMark;
+
+                Log.LogWarning(2023);
+                if (!__instance.GetSEMan().HaveStatusEffect("Fist Marked For Death FX"))
+                {
+                    Log.LogWarning(2024);
+                    //Log.LogInfo(effect.GetLastHitThrowing());
+                    if (__instance.GetSEMan().HaveStatusEffect("Fist Marked For Death") && effect.GetLastHitFist())
+                    {
+                        Log.LogWarning(2025);
+                        //increase counter
+                        (__instance.GetSEMan().GetStatusEffect("Fist Marked For Death") as SE_FistMarkedForDeath).IncreaseCounter();
+                        //Log.LogMessage($"Death Mark Counter : {(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).m_count}");
+                    }
+                    else if (effect.GetLastHitFist())
+                    {
+                        Log.LogWarning(2026);
+                        //Log.LogMessage("Adding Death Mark");
+                        //add marked for death counter
+                        __instance.GetSEMan().AddStatusEffect("Fist Marked For Death");
+                        //(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).IncreaseCounter();
+                        (__instance.GetSEMan().GetStatusEffect("Fist Marked For Death") as SE_FistMarkedForDeath).SetActivationCount(effect.GetThreshold());
+                        (__instance.GetSEMan().GetStatusEffect("Fist Marked For Death") as SE_FistMarkedForDeath).SetDamageBonus(effect.GetDamageBonus());
+                        (__instance.GetSEMan().GetStatusEffect("Fist Marked For Death") as SE_FistMarkedForDeath).SetHitDuration(effect.GetHitDuration());
+                        //Log.LogInfo($"Death Mark Counter : {(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).m_count}, " +
+                        //$"Activation: {(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).GetActivationCount()} " +
+                        //$"Damage Bonus: {(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).GetDamageBonus()} " +
+                        //$"Hit Amount: {(__instance.GetSEMan().GetStatusEffect("Marked For Death") as SE_MarkedForDeath).GetHitDuration()}");
+                    }
+                }
+                Log.LogWarning(2029);
+            }
+
             //Bloodrush
             Log.LogWarning(131);
             if (__instance.GetHealth() <= hit.GetTotalDamage() && attacker.GetSEMan().HaveStatusEffect("Bloodrush Listener"))

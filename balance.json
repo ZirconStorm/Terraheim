@@ -16,6 +16,7 @@
     "bloodrushMaxSpeed": 0.5,
     "enableMarkedForDeathFX": true,
     "enableMarkedForDeathFXBow": true,
+    "enableMarkedForDeathFXFist": true,
     "brassfleshTTL": 10,
     "setsAreLockedByTier": false,
     "boonSettings": {
@@ -451,7 +452,7 @@
         "baseArmor": 7,
         "armorPerLevel": 2,
         "globalMoveMod": 0,
-        "setEffect": "deathmarkbow",
+        "setEffect": "deathmarkfist",
         "headEffect": "throwdmgvel",
         "chestEffect": "throwdmgvel",
         "legsEffect": "dmgvslowhp",

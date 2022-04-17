@@ -105,6 +105,15 @@ namespace Terraheim.Utility
                         effect.SetIcon();
                         return effect;
                     }
+                case "deathmarkfist":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_FistDeathMark>();
+                        effect.SetDamageBonus((float)values["setBonusVal"]);
+                        effect.SetThreshold((int)values["setBonusThreshold"]);
+                        effect.SetHitDuration((int)values["setBonusDuration"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
                 case "brassflesh":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_ArmorOnHitListener>();
