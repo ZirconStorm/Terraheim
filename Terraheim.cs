@@ -194,6 +194,9 @@ namespace Terraheim
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_LightningAoECounter>(), fixReference: true)); //Chitin
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_LightningAoECounterFX>(), fixReference: true)); //Chitin
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_LightningAoECounterExhausted>(), fixReference: true)); //Chitin
+            ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_FireAoECounter>(), fixReference: true)); //Scorched
+            ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_FireAoECounterFX>(), fixReference: true)); //Scorched
+            ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_FireAoECounterExhausted>(), fixReference: true)); //Scorched
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_BowAoECounter>(), fixReference: true)); //Silver2
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_BowAoECounterFX>(), fixReference: true)); //Silver2
             ItemManager.Instance.AddStatusEffect(new CustomStatusEffect(ScriptableObject.CreateInstance<SE_BowAoECounterExhausted>(), fixReference: true)); //Silver2

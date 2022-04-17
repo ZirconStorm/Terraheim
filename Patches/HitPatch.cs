@@ -476,6 +476,10 @@ namespace Terraheim.Patches
             {
                 (hit.GetAttacker().GetSEMan().GetStatusEffect("Njords Anger") as SE_LightningAoECounter).IncreaseCounter();
             }
+            if (hit.HaveAttacker() && hit.GetAttacker().IsPlayer() && hit.GetAttacker().GetSEMan().HaveStatusEffect("Firestorm"))
+            {
+                (hit.GetAttacker().GetSEMan().GetStatusEffect("Firestorm") as SE_FireAoECounter).IncreaseCounter();
+            }
             if (hit.HaveAttacker() && hit.GetAttacker().IsPlayer() && hit.GetAttacker().GetSEMan().HaveStatusEffect("Brassflesh Listener"))
             {
                 if (hit.GetAttacker().GetSEMan().HaveStatusEffect("Brassflesh"))

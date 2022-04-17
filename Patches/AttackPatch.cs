@@ -28,6 +28,8 @@ namespace Terraheim.Patches
                           //Log.LogWarning(89);
                 return;
             }
+
+            
             //Log.LogWarning(1);
             //Log.LogWarning(weapon.m_dropPrefab.name);
             //Log.LogWarning(12);
@@ -39,6 +41,11 @@ namespace Terraheim.Patches
                 Log.LogMessage("Terraheim (AttackPatch Start) | Weapon is null, grabbing directly");
                 baseWeapon = ObjectDB.instance.GetItemPrefab(weapon.m_dropPrefab.name).GetComponent<ItemDrop>();
             }
+            //Log.LogInfo("1) " + __instance);
+            //Log.LogInfo("2) " + __instance.GetWeapon());
+            //Log.LogInfo("3) " + __instance.GetWeapon().m_shared);
+            //Log.LogInfo("4) " + __instance.GetWeapon().m_shared.m_itemType);
+
             //Log.LogWarning(2);
 
             //set all damages to default values to prevent forever increasing damages
@@ -382,6 +389,31 @@ namespace Terraheim.Patches
                 }
             }
 
+            if (character.GetSEMan().HaveStatusEffect("FirestormFX"))
+            {
+                Log.LogInfo("Firestorm Active");
+                //Log.LogInfo("1) " + __instance);
+                //Log.LogInfo("2) " + __instance.GetWeapon());
+                //Log.LogInfo("3) " + __instance.GetWeapon().m_shared);
+                //Log.LogInfo("4) " + __instance.GetWeapon().m_shared.m_itemType);
+                if (weapon.m_shared.m_itemType == ItemDrop.ItemData.ItemType.TwoHandedWeapon)
+                //if (weapon.m_shared.m_name.Contains("Atgeir") || weapon.m_shared.m_name.Contains("Battleaxe") ||
+                //    weapon.m_shared.m_name.Contains("Sledge") || weapon.m_shared.m_name.Contains("GreatSword"))
+                {
+                    var effect = character.GetSEMan().GetStatusEffect("Firestorm") as SE_FireAoECounter;
+                    var damageBonus = (weapon.m_shared.m_damages.GetTotalDamage() * effect.GetDamageBonus()) / 2;
+                    AssetHelper.TestProjectile.GetComponent<Projectile>().m_spawnOnHit.GetComponent<Aoe>().m_radius = effect.GetAoESize();
+
+                    AssetHelper.TestProjectile.GetComponent<Projectile>().m_spawnOnHit.GetComponent<Aoe>().m_damage.m_fire = damageBonus;
+                    AssetHelper.TestProjectile.GetComponent<Projectile>().m_spawnOnHit.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+
+                    Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " fire and " + damageBonus + " lightning damage.");
+
+                    __instance.m_attackProjectile = AssetHelper.FlamebowWyrdExplosion;
+                    __instance.m_attackType = Attack.AttackType.Projectile;
+                }
+            }
+
             if (character.GetSEMan().HaveStatusEffect("Mercenary") && (__instance.m_attackAnimation == weapon.m_shared.m_secondaryAttack.m_attackAnimation || __instance.m_attackAnimation == weapon.m_shared.m_attack.m_attackAnimation))
             {
                 SE_Mercenary effect = character.GetSEMan().GetStatusEffect("Mercenary") as SE_Mercenary;
@@ -552,6 +584,34 @@ namespace Terraheim.Patches
                     __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
                 }
             }
+            else if (__instance.m_character.GetSEMan().HaveStatusEffect("FirestormFX"))
+            {
+                var effect = __instance.m_character.GetSEMan().GetStatusEffect("Firestorm") as SE_FireAoECounter;
+
+                AssetHelper.TestExplosion.GetComponent<Aoe>().m_radius = effect.GetAoESize();
+                if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow)
+                {
+                    var damageBonus = (__instance.GetWeapon().GetDamage().GetTotalDamage() + __instance.m_ammoItem.m_shared.m_damages.GetTotalDamage()
+                        * effect.GetDamageBonus()) / 2;
+                    AssetHelper.FlamebowWyrdExplosion.GetComponent<Aoe>().m_damage.m_fire = damageBonus;
+                    AssetHelper.FlamebowWyrdExplosion.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+
+                    Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " fire and " + damageBonus + " lightning damage.");
+
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.FlamebowWyrdExplosion;
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                }
+                else if (__instance.GetWeapon().m_shared.m_name.Contains("spear"))
+                {
+                    var damageBonus = (__instance.GetWeapon().GetDamage().GetTotalDamage() * effect.GetDamageBonus()) / 2;
+                    AssetHelper.TestExplosion.GetComponent<Aoe>().m_damage.m_fire = damageBonus;
+                    AssetHelper.TestExplosion.GetComponent<Aoe>().m_damage.m_lightning = damageBonus;
+                    Log.LogInfo("Terraheim | Aoe deals " + damageBonus + " fire and " + damageBonus + " lightning damage.");
+
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = AssetHelper.FlamebowWyrdExplosion;
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 1;
+                }
+            }
             else if (__instance.m_character.IsPlayer() && __instance.GetWeapon().m_shared.m_name.Contains("bow_fireTH"))
             {
                 JObject balance = UtilityFunctions.GetJsonFromFile("weaponBalance.json");
@@ -639,6 +699,24 @@ namespace Terraheim.Patches
                 if (__instance.m_character.GetSEMan().HaveStatusEffect("Njords AngerFX"))
                 {
                     var effect = __instance.m_character.GetSEMan().GetStatusEffect("Njords Anger") as SE_LightningAoECounter;
+                    effect.ClearCounter();
+                }
+            }
+            else if (__instance.m_character.GetSEMan().HaveStatusEffect("Firestorm"))
+            {
+                if (__instance.GetWeapon().m_shared.m_itemType == ItemDrop.ItemData.ItemType.Bow && __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit == AssetHelper.TestExplosion)
+                {
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = null;
+                    __instance.m_ammoItem.m_shared.m_attack.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 0;
+                }
+                else if (__instance.GetWeapon().m_shared.m_name.Contains("spear") && __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit == AssetHelper.TestExplosion)
+                {
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHit = null;
+                    __instance.m_attackProjectile.GetComponent<Projectile>().m_spawnOnHitChance = 0;
+                }
+                if (__instance.m_character.GetSEMan().HaveStatusEffect("FirestormFX"))
+                {
+                    var effect = __instance.m_character.GetSEMan().GetStatusEffect("Firestorm") as SE_FireAoECounter;
                     effect.ClearCounter();
                 }
             }

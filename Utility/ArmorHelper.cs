@@ -70,6 +70,16 @@ namespace Terraheim.Utility
                         effect.SetIcon();
                         return effect;
                     }
+                case "firestorm":
+                    {
+                        Log.LogMessage("hello");
+                        var effect = ScriptableObject.CreateInstance<SE_FireAoECounter>();
+                        effect.SetDamageBonus((float)values["setBonusVal"]);
+                        effect.SetActivationCount((int)values["setActivationCount"]);
+                        effect.SetAoESize((float)values["setAoESize"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
                 case "thorns":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_Thorns>();
