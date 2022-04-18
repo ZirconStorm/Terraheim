@@ -225,6 +225,9 @@
     <Compile Include="Utility\UtilityFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="balance - new.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="balance.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

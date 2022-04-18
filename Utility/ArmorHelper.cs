@@ -177,6 +177,14 @@ namespace Terraheim.Utility
         {
             switch (name)
             {
+                case "crit":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_CritChance>();
+                        effect.SetCritChance((float)values[$"{location}EffectChance"]);
+                        effect.SetCritBonus((float)values[$"{location}EffectVal"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
                 case "onehanddmg":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_OneHandDamageBonus>();
@@ -659,6 +667,46 @@ namespace Terraheim.Utility
                 }
             }
 
+            //Add frost resist to DeepNorth chest pieces
+            if (location == "chest" && (setName == "crystal" || setName == "dragonslayer"))
+            {
+                HitData.DamageModPair mod = new HitData.DamageModPair
+                {
+                    m_type = HitData.DamageType.Frost,
+                    m_modifier = HitData.DamageModifier.VeryResistant
+                };
+                piece.m_shared.m_damageModifiers.Add(mod);
+            }
+
+            //if (setName == "root")
+            //{
+            //    if (location == "head")
+            //    {
+            //        HitData.DamageModPair mod = new HitData.DamageModPair
+            //        {
+            //            m_type = HitData.DamageType.Poison,
+            //            m_modifier = HitData.DamageModifier.Resistant
+            //        };
+            //        piece.m_shared.m_damageModifiers.Add(mod);
+
+            //    } 
+            //    else if (location == "chest")
+            //    {
+            //        HitData.DamageModPair mod = new HitData.DamageModPair
+            //        {
+            //            m_type = HitData.DamageType.Pierce,
+            //            m_modifier = HitData.DamageModifier.Resistant
+            //        };
+            //        piece.m_shared.m_damageModifiers.Add(mod);
+            //    }
+            //    HitData.DamageModPair mod2 = new HitData.DamageModPair
+            //    {
+            //        m_type = HitData.DamageType.Fire,
+            //        m_modifier = HitData.DamageModifier.Weak
+            //    };
+            //    piece.m_shared.m_damageModifiers.Add(mod2);
+            //}
+
             StatusEffect setEffect = GetSetEffect((string)values["setEffect"], tierBalance);
 
             piece.m_shared.m_armor = (float)tierBalance["baseArmor"];
@@ -754,7 +802,8 @@ namespace Terraheim.Utility
         {
             var setBalance = balance[setName];
             ArmorSet armor = ArmorSets[setName];
-            for (int i = (int)setBalance["upgrades"]["startingTier"]; i <= 6; i++)
+            var className = setBalance["class"]; // armor class
+            for (int i = (int)setBalance["upgrades"]["startingTier"]; i < 6; i++)
             {
                 var tierBalance = setBalance["upgrades"][$"t{i}"];
                 string id = "";
@@ -793,7 +842,7 @@ namespace Terraheim.Utility
                     clonedPiece.name = $"{id}T{i}_Terraheim_BarbarianArmor_AddNewSets";
                 }
 
-                CustomItem piece = new CustomItem(clonedPiece, true);
+            CustomItem piece = new CustomItem(clonedPiece, true);
 
                 piece.ItemDrop.m_itemData.m_shared.m_name = $"{name}{i}";
 
@@ -815,7 +864,7 @@ namespace Terraheim.Utility
                     recipeList[0].m_amountPerLevel = 0;
                 }
 
-                var recipeReqs = balance["upgradePath"][$"t{i}"];
+                var recipeReqs = balance["upgradePath"][$"{className}"][$"t{i}"];
                 int index = 0 + j;
                 foreach (JObject item in recipeReqs[location])
                 {
@@ -890,6 +939,28 @@ namespace Terraheim.Utility
                         m_modifier = HitData.DamageModifier.Resistant
                     };
                     piece.ItemDrop.m_itemData.m_shared.m_damageModifiers.Add(mod);
+                    Log.LogMessage($"Added frost resist to {piece.ItemDrop.name}");
+                }
+                else if (i == 1)
+                {
+                    if (!setName.Contains("Wolf") && !setName.Contains("Lox"))
+                    {
+                        HitData.DamageModPair mod2 = new HitData.DamageModPair
+                        {
+                            m_type = HitData.DamageType.Frost,
+                            m_modifier = HitData.DamageModifier.Resistant
+                        };
+                        piece.ItemDrop.m_itemData.m_shared.m_damageModifiers.Add(mod2);
+                    }
+                }
+                else if (i == 2)
+                {
+                    HitData.DamageModPair mod = new HitData.DamageModPair
+                    {
+                        m_type = HitData.DamageType.Frost,
+                        m_modifier = HitData.DamageModifier.VeryResistant
+                    };
+                    piece.ItemDrop.m_itemData.m_shared.m_damageModifiers.Add(mod);
                 }
                 else
                 {
@@ -899,15 +970,6 @@ namespace Terraheim.Utility
                         m_modifier = HitData.DamageModifier.Resistant
                     };
                     piece.ItemDrop.m_itemData.m_shared.m_damageModifiers.Add(mod);
-                    if(!setName.Contains("Wolf") && !setName.Contains("Lox"))
-                    {
-                        HitData.DamageModPair mod2 = new HitData.DamageModPair
-                        {
-                            m_type = HitData.DamageType.Frost,
-                            m_modifier = HitData.DamageModifier.Resistant
-                        };
-                        piece.ItemDrop.m_itemData.m_shared.m_damageModifiers.Add(mod2);
-                    }
                 }
                 //Recipes
                 Recipe recipe = ScriptableObject.CreateInstance<Recipe>();
@@ -1036,7 +1098,7 @@ namespace Terraheim.Utility
         {
             ArmorSet armor = ArmorSets[setName];
             string armorSetName = char.ToUpper(setName[0]) + setName.Substring(1);
-            for (int i = (int)balance[setName]["upgrades"]["startingTier"] + 1; i <= 6; i++)
+            for (int i = (int)balance[setName]["upgrades"]["startingTier"] + 1; i < 6; i++)
             {
                 Recipe helmetRecipe = null;
                 Recipe chestRecipe;
