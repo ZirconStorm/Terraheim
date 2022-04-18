@@ -246,243 +246,793 @@
                 "chestEffectVal": 0.25,
                 "legsEffectVal": 0.20
             }
-        },
-        "dragonslayer": {
-            "enabled": true,
-            "name": "dragonslayer",
-            "class": "berserker",
-            "baseArmor": 32,
-            "armorPerLevel": 2,
-            "globalMoveMod": -0.05,
-            "setEffect": "wolftears",
-            "headEffect": "frostningdmg",
-            "chestEffect": "twohanddmg",
-            "legsEffect": "throwdmgvel",
-            "setBonusVal": 0.75,
-            "setActivationHP": 0.25,
-            "headEffectVal": 0.08,
-            "chestEffectVal": 0.20,
-            "legsEffectVal": 0.28,
-            "upgrades": {
-                "startingTier": 5,
-                "t5": {
-                    "baseArmor": 38,
-                    "armorPerLevel": 2,
-                    "globalMoveMod": -0.05,
-                    "setBonusVal": 1.50,
-                    "setActivationHP": 0.10,
-                    "headEffectVal": 0.15,
-                    "chestEffectVal": 0.25,
-                    "legsEffectVal": 0.33
-                }
+        }
+    },
+    "dragonslayer": {
+        "enabled": true,
+        "name": "dragonslayer",
+        "class": "berserker",
+        "baseArmor": 32,
+        "armorPerLevel": 2,
+        "globalMoveMod": -0.05,
+        "setEffect": "wolftears",
+        "headEffect": "frostningdmg",
+        "chestEffect": "twohanddmg",
+        "legsEffect": "throwdmgvel",
+        "setBonusVal": 0.75,
+        "setActivationHP": 0.25,
+        "headEffectVal": 0.08,
+        "chestEffectVal": 0.20,
+        "legsEffectVal": 0.28,
+        "upgrades": {
+            "startingTier": 5,
+            "t5": {
+                "baseArmor": 38,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.05,
+                "setBonusVal": 1.50,
+                "setActivationHP": 0.10,
+                "headEffectVal": 0.15,
+                "chestEffectVal": 0.25,
+                "legsEffectVal": 0.33
             }
-        },
-        "warrior": {
-            "enabled": true,
-            "name": "warrior",
-            "class": "berserker",
-            "baseArmor": 40,
-            "armorPerLevel": 2,
-            "globalMoveMod": -0.07,
-            "setEffect": "battlefuror",
-            "headEffect": "crit",
-            "chestEffect": "onehanddmg",
-            "legsEffect": "twohanddmg",
-            "setBonusVal": 0.75,
-            "setActivationHP": 0.5,
-            "headEffectVal": 2.5,
-            "headEffectChance": 0.15,
-            "chestEffectVal": 0.33,
-            "legsEffectVal": 0.28,
-            "upgrades": {}
-        },
-        "capes": {
-            "leather": {
-                "effect": "movespeed",
-                "capeEffectVal": 0.05
+        }
+    },
+    "warrior": {
+        "enabled": true,
+        "name": "warrior",
+        "class": "berserker",
+        "baseArmor": 40,
+        "armorPerLevel": 2,
+        "globalMoveMod": -0.07,
+        "setEffect": "battlefuror",
+        "headEffect": "crit",
+        "chestEffect": "onehanddmg",
+        "legsEffect": "twohanddmg",
+        "setBonusVal": 0.75,
+        "setActivationHP": 0.5,
+        "headEffectVal": 2.5,
+        "headEffectChance": 0.15,
+        "chestEffectVal": 0.33,
+        "legsEffectVal": 0.28,
+        "upgrades": {}
+    },
+    "barbarian": {
+        "enabled": true,
+        "name": "barbarian",
+        "class": "bowman",
+        "baseArmor": 3,
+        "armorPerLevel": 2,
+        "globalMoveMod": -0.02,
+        "setEffect": "",
+        "headEffect": "",
+        "chestEffect": "",
+        "legsEffect": "",
+        "setBonusVal": ,
+        "headEffectVal": ,
+        "chestEffectVal": ,
+        "legsEffectVal": ,
+        "upgrades": {
+            "startingTier": 1,
+            "t1": {
+                "baseArmor": 8,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
             },
-            "trollLeather": {
-                "effect": "backstabdmg",
-                "capeEffectVal": 2
+            "t2": {
+                "baseArmor": 12,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
             },
-            "wolf": {
-                "effect": "spiritdmg",
-                "capeEffectVal": 12
+            "t3": {
+                "baseArmor": 18,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
             },
-            "lox": {
-                "effect": "fooduse",
-                "capeEffectVal": 0.5
+            "t4": {
+                "baseArmor": 24,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
             },
-            "linen": {
-                "effect": "attackstamina",
-                "capeEffectVal": 0.2
-            },
-            "barbarian": {
-                "effect": "speedonkill",
-                "capeEffectVal": 0.1
-            },
-            "upgrades": {
-                "t0": {
-                    "station": "reforger",
-                    "minLevel": 2,
-                    "resources": [
-                        {
-                            "item": "TrophyWolf",
-                            "amount": 1,
-                            "perLevel": 0
-                        },
-                        {
-                            "item": "WolfPelt",
-                            "amount": 5,
-                            "perLevel": 1
-                        },
-                        {
-                            "item": "Silver",
-                            "amount": 6,
-                            "perLevel": 2
-                        }
-                    ]
-                },
-                "t1": {
-                    "station": "reforger",
-                    "minLevel": 2,
-                    "resources": [
-                        {
-                            "item": "SalamanderFur",
-                            "amount": 4,
-                            "perLevel": 0
-                        },
-                        {
-                            "item": "BoneFragments",
-                            "amount": 3,
-                            "perLevel": 0
-                        }
-                    ]
-                }
+            "t5": {
+                "baseArmor": 28,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
             }
+        }
+    },
+    "troll": {
+        "enabled": true,
+        "name": "troll",
+        "class": "bowman",
+        "baseArmor": 6,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "setEffect": "",
+        "headEffect": "",
+        "chestEffect": "",
+        "legsEffect": "",
+        "setBonusVal": ,
+        "headEffectVal": ,
+        "chestEffectVal": ,
+        "legsEffectVal": ,
+        "upgrades": {
+            "startingTier": 2,
+            "t2": {
+                "baseArmor": 10,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            },
+            "t3": {
+                "baseArmor": 16,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            },
+            "t4": {
+                "baseArmor": 22,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            },
+            "t5": {
+                "baseArmor": 26,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            }
+        }
+    },
+    "chitin": {
+        "enabled": true,
+        "name": "chitin",
+        "class": "bowman",
+        "baseArmor": 8,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0.02,
+        "setEffect": "",
+        "headEffect": "",
+        "chestEffect": "",
+        "legsEffect": "",
+        "setBonusVal": ,
+        "headEffectVal": ,
+        "chestEffectVal": ,
+        "legsEffectVal": ,
+        "upgrades": {
+            "startingTier": 3,
+            "t3": {
+                "baseArmor": 14,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            },
+            "t4": {
+                "baseArmor": 20,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            },
+            "t5": {
+                "baseArmor": 24,
+                "armorPerLevel": 2,
+                "globalMoveMod": 0.02,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            }
+        }
+    },
+    "nomad": {
+        "enabled": true,
+        "name": "nomad",
+        "class": "bowman",
+        "baseArmor": 20,
+        "armorPerLevel": 2,
+        "globalMoveMod": -0.04,
+        "setEffect": "",
+        "headEffect": "",
+        "chestEffect": "",
+        "legsEffect": "",
+        "setBonusVal": ,
+        "headEffectVal": ,
+        "chestEffectVal": ,
+        "legsEffectVal": ,
+        "upgrades": {
+            "startingTier": 4,
+            "t4": {
+                "baseArmor": 24,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.04,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            },
+            "t5": {
+                "baseArmor": 30,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.04,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            }
+        }
+    },
+    "heavymetal": {
+        "enabled": true,
+        "name": "heavymetal",
+        "class": "bowman",
+        "baseArmor": 26,
+        "armorPerLevel": 2,
+        "globalMoveMod": -0.06,
+        "setEffect": "",
+        "headEffect": "",
+        "chestEffect": "",
+        "legsEffect": "",
+        "setBonusVal": ,
+        "headEffectVal": ,
+        "chestEffectVal": ,
+        "legsEffectVal": ,
+        "upgrades": {
+            "startingTier": 5,
+            "t5": {
+                "baseArmor": 32,
+                "armorPerLevel": 2,
+                "globalMoveMod": -0.06,
+                "setBonusVal": ,
+                "headEffectVal": ,
+                "chestEffectVal": ,
+                "legsEffectVal":
+            }
+        }
+    },
+    "noble": {
+        "enabled": true,
+        "name": "noble",
+        "class": "bowman",
+        "baseArmor": 22,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0.08,
+        "setEffect": "",
+        "headEffect": "",
+        "chestEffect": "",
+        "legsEffect": "",
+        "setBonusVal": ,
+        "headEffectVal": ,
+        "chestEffectVal": ,
+        "legsEffectVal": ,
+        "upgrades": {}
+    },
+    "capes": {
+        "leather": {
+            "effect": "movespeed",
+            "capeEffectVal": 0.05
         },
-        "woodsmanHelmet": {
-            "name": "woodsmanHelmet",
-            "baseArmor": 2,
-            "armorPerLevel": 2,
-            "globalMoveMod": 0,
-            "effect": "woodsman",
-            "headEffectVal": 0.5,
-            "crafting": {
-                "station": "forge",
-                "minLevel": 3,
-                "items": [
+        "trollLeather": {
+            "effect": "backstabdmg",
+            "capeEffectVal": 2
+        },
+        "wolf": {
+            "effect": "spiritdmg",
+            "capeEffectVal": 12
+        },
+        "lox": {
+            "effect": "fooduse",
+            "capeEffectVal": 0.5
+        },
+        "linen": {
+            "effect": "attackstamina",
+            "capeEffectVal": 0.2
+        },
+        "barbarian": {
+            "effect": "speedonkill",
+            "capeEffectVal": 0.1
+        },
+        "upgrades": {
+            "t0": {
+                "station": "reforger",
+                "minLevel": 2,
+                "resources": [
                     {
-                        "item": "Iron",
-                        "amount": 10,
+                        "item": "TrophyWolf",
+                        "amount": 1,
+                        "perLevel": 0
+                    },
+                    {
+                        "item": "WolfPelt",
+                        "amount": 5,
                         "perLevel": 1
                     },
                     {
-                        "item": "SurtlingCore",
+                        "item": "Silver",
+                        "amount": 6,
+                        "perLevel": 2
+                    }
+                ]
+            },
+            "t1": {
+                "station": "reforger",
+                "minLevel": 2,
+                "resources": [
+                    {
+                        "item": "SalamanderFur",
                         "amount": 4,
                         "perLevel": 0
                     },
                     {
-                        "item": "Ruby",
-                        "amount": 10,
-                        "perLevel": 1
-                    },
-                    {
-                        "item": "AmberPearl",
-                        "amount": 5,
-                        "perLevel": 1
+                        "item": "BoneFragments",
+                        "amount": 3,
+                        "perLevel": 0
                     }
                 ]
             }
-        },
-        "minersBelt": {
-            "name": "minersBelt",
-            "baseArmor": 2,
-            "armorPerLevel": 2,
-            "globalMoveMod": 0,
-            "effect": "miner",
-            "headEffectVal": 0.5,
-            "crafting": {
-                "station": "forge",
-                "minLevel": 4,
-                "items": [
+        }
+    },
+    "woodsmanHelmet": {
+        "name": "woodsmanHelmet",
+        "baseArmor": 2,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "effect": "woodsman",
+        "headEffectVal": 0.5,
+        "crafting": {
+            "station": "forge",
+            "minLevel": 3,
+            "items": [
+                {
+                    "item": "Iron",
+                    "amount": 10,
+                    "perLevel": 1
+                },
+                {
+                    "item": "SurtlingCore",
+                    "amount": 4,
+                    "perLevel": 0
+                },
+                {
+                    "item": "Ruby",
+                    "amount": 10,
+                    "perLevel": 1
+                },
+                {
+                    "item": "AmberPearl",
+                    "amount": 5,
+                    "perLevel": 1
+                }
+            ]
+        }
+    },
+    "minersBelt": {
+        "name": "minersBelt",
+        "baseArmor": 2,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "effect": "miner",
+        "headEffectVal": 0.5,
+        "crafting": {
+            "station": "forge",
+            "minLevel": 4,
+            "items": [
+                {
+                    "item": "Silver",
+                    "amount": 10,
+                    "perLevel": 1
+                },
+                {
+                    "item": "SurtlingCore",
+                    "amount": 4,
+                    "perLevel": 0
+                },
+                {
+                    "item": "Crystal",
+                    "amount": 8,
+                    "perLevel": 1
+                },
+                {
+                    "item": "DragonTear",
+                    "amount": 1,
+                    "perLevel": 0
+                }
+            ]
+        }
+    },
+    "waterproofBelt": {
+        "name": "waterproofBelt",
+        "baseArmor": 2,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "effect": "waterproof",
+        "headEffectVal": 0.5,
+        "crafting": {
+            "station": "forge",
+            "minLevel": 4,
+            "items": [
+                {
+                    "item": "Silver",
+                    "amount": 10,
+                    "perLevel": 1
+                },
+                {
+                    "item": "TrophyHatchling",
+                    "amount": 1,
+                    "perLevel": 0
+                },
+                {
+                    "item": "Crystal",
+                    "amount": 10,
+                    "perLevel": 1
+                },
+                {
+                    "item": "Obsidian",
+                    "amount": 20,
+                    "perLevel": 0
+                }
+            ]
+        }
+    },
+    "farmerBelt": {
+        "name": "farmerBelt",
+        "baseArmor": 2,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "effect": "farmer",
+        "headEffectVal": 0.5,
+        "crafting": {
+            "station": "piece_workbench",
+            "minLevel": 4,
+            "items": [
+                {
+                    "item": "HardAntler",
+                    "amount": 15,
+                    "perLevel": 0
+                },
+                {
+                    "item": "AmberPearl",
+                    "amount": 5,
+                    "perLevel": 0
+                },
+                {
+                    "item": "SurtlingCore",
+                    "amount": 3,
+                    "perLevel": 1
+                },
+                {
+                    "item": "LeatherScraps",
+                    "amount": 20,
+                    "perLevel": 0
+                }
+            ]
+        }
+    },
+    "thiefBelt": {
+        "name": "thiefBelt",
+        "baseArmor": 2,
+        "armorPerLevel": 2,
+        "globalMoveMod": 0,
+        "effect": "thief",
+        "headEffectVal": 0.25,
+        "crafting": {
+            "station": "piece_workbench",
+            "minLevel": 4,
+            "items": [
+                {
+                    "item": "Bronze",
+                    "amount": 12,
+                    "perLevel": 0
+                },
+                {
+                    "item": "TrollHide",
+                    "amount": 20,
+                    "perLevel": 0
+                },
+                {
+                    "item": "SurtlingCore",
+                    "amount": 5,
+                    "perLevel": 1
+                },
+                {
+                    "item": "Amber",
+                    "amount": 10,
+                    "perLevel": 0
+                }
+            ]
+        }
+    },
+    "salamanderFur": {
+        "crafting": {
+            "station": "piece_workbench",
+            "minLevel": 4,
+            "amountCrafted": 1,
+            "items": [
+                {
+                    "item": "SurtlingCore",
+                    "amount": 1,
+                    "perLevel": 0
+                },
+                {
+                    "item": "LinenThread",
+                    "amount": 5,
+                    "perLevel": 0
+                },
+                {
+                    "item": "Chitin",
+                    "amount": 1,
+                    "perLevel": 0
+                }
+            ]
+        }
+    },
+    "upgradePath": {
+        "berserker": {
+            "t1": {
+                "station": "workbench",
+                "minLevel": 3,
+                "head": [
                     {
-                        "item": "Silver",
+                        "item": "Root",
                         "amount": 10,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "ElderBark",
+                        "amount": 10,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 2,
                         "perLevel": 1
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "Root",
+                        "amount": 10,
+                        "perLevel": 5
                     },
                     {
-                        "item": "SurtlingCore",
-                        "amount": 4,
-                        "perLevel": 0
+                        "item": "ElderBark",
+                        "amount": 10,
+                        "perLevel": 5
                     },
                     {
-                        "item": "Crystal",
-                        "amount": 8,
+                        "item": "DeerHide",
+                        "amount": 2,
                         "perLevel": 1
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "Root",
+                        "amount": 10,
+                        "perLevel": 5
                     },
                     {
-                        "item": "DragonTear",
+                        "item": "ElderBark",
+                        "amount": 10,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 2,
+                        "perLevel": 1
+                    }
+                ]
+            },
+            "t2": {
+                "station": "workbench",
+                "minLevel": 5,
+                "head": [
+                    {
+                        "item": "WolfHairBundle",
+                        "amount": 15,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "WolfPelt",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "TrophyCultist",
                         "amount": 1,
                         "perLevel": 0
                     }
-                ]
-            }
-        },
-        "waterproofBelt": {
-            "name": "waterproofBelt",
-            "baseArmor": 2,
-            "armorPerLevel": 2,
-            "globalMoveMod": 0,
-            "effect": "waterproof",
-            "headEffectVal": 0.5,
-            "crafting": {
-                "station": "forge",
-                "minLevel": 4,
-                "items": [
+                ],
+                "chest": [
                     {
-                        "item": "Silver",
+                        "item": "WolfHairBundle",
+                        "amount": 15,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "WolfPelt",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 4,
+                        "perLevel": 2
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "WolfHairBundle",
+                        "amount": 15,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "WolfPelt",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 4,
+                        "perLevel": 2
+                    }
+                ]
+            },
+            "t3": {
+                "station": "forge",
+                "minLevel": 3,
+                "head": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 20,
+                        "perLevel": 12
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 2,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "TrophySerpent",
+                        "amount": 2,
+                        "perLevel": 0
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 20,
+                        "perLevel": 12
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 5,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "SerpentScale",
                         "amount": 10,
-                        "perLevel": 1
+                        "perLevel": 5
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 20,
+                        "perLevel": 12
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 5,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "SerpentScale",
+                        "amount": 10,
+                        "perLevel": 5
+                    }
+                ]
+            },
+            "t4": {
+                "station": "piece_thorsforge",
+                "minLevel": 1,
+                "head": [
+                    {
+                        "item": "FrometalBar",
+                        "amount": 15,
+                        "perLevel": 10
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 5,
+                        "perLevel": 2
                     },
                     {
                         "item": "TrophyHatchling",
-                        "amount": 1,
+                        "amount": 2,
                         "perLevel": 0
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "FrometalBar",
+                        "amount": 15,
+                        "perLevel": 15
                     },
                     {
-                        "item": "Crystal",
-                        "amount": 10,
-                        "perLevel": 1
+                        "item": "LoxPelt",
+                        "amount": 8,
+                        "perLevel": 4
                     },
                     {
                         "item": "Obsidian",
-                        "amount": 20,
-                        "perLevel": 0
+                        "amount": 10,
+                        "perLevel": 8
                     }
-                ]
-            }
-        },
-        "farmerBelt": {
-            "name": "farmerBelt",
-            "baseArmor": 2,
-            "armorPerLevel": 2,
-            "globalMoveMod": 0,
-            "effect": "farmer",
-            "headEffectVal": 0.5,
-            "crafting": {
-                "station": "piece_workbench",
-                "minLevel": 4,
-                "items": [
+                ],
+                "legs": [
                     {
-                        "item": "HardAntler",
+                        "item": "FrometalBar",
                         "amount": 15,
-                        "perLevel": 0
+                        "perLevel": 15
                     },
                     {
-                        "item": "AmberPearl",
-                        "amount": 5,
-                        "perLevel": 0
+                        "item": "LoxPelt",
+                        "amount": 8,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "Obsidian",
+                        "amount": 10,
+                        "perLevel": 8
+                    }
+                ]
+            },
+            "t5": {
+                "station": "piece_thorsforge",
+                "minLevel": 1,
+                "head": [
+                    {
+                        "item": "Flametal",
+                        "amount": 15,
+                        "perLevel": 10
                     },
                     {
                         "item": "SurtlingCore",
@@ -490,348 +1040,549 @@
                         "perLevel": 1
                     },
                     {
-                        "item": "LeatherScraps",
-                        "amount": 20,
-                        "perLevel": 0
+                        "item": "DeerHide",
+                        "amount": 2,
+                        "perLevel": 1
                     }
-                ]
-            }
-        },
-        "thiefBelt": {
-            "name": "thiefBelt",
-            "baseArmor": 2,
-            "armorPerLevel": 2,
-            "globalMoveMod": 0,
-            "effect": "thief",
-            "headEffectVal": 0.25,
-            "crafting": {
-                "station": "piece_workbench",
-                "minLevel": 4,
-                "items": [
+                ],
+                "chest": [
                     {
-                        "item": "Bronze",
-                        "amount": 12,
-                        "perLevel": 0
-                    },
-                    {
-                        "item": "TrollHide",
+                        "item": "Flametal",
                         "amount": 20,
-                        "perLevel": 0
+                        "perLevel": 15
                     },
                     {
                         "item": "SurtlingCore",
                         "amount": 5,
-                        "perLevel": 1
+                        "perLevel": 2
                     },
                     {
-                        "item": "Amber",
-                        "amount": 10,
-                        "perLevel": 0
+                        "item": "Stone",
+                        "amount": 5,
+                        "perLevel": 2
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "Flametal",
+                        "amount": 20,
+                        "perLevel": 15
+                    },
+                    {
+                        "item": "SurtlingCore",
+                        "amount": 5,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "Forgedscale",
+                        "amount": 5,
+                        "perLevel": 5
                     }
                 ]
             }
         },
-        "salamanderFur": {
-            "crafting": {
-                "station": "piece_workbench",
-                "minLevel": 4,
-                "amountCrafted": 1,
-                "items": [
+        "bowman": {
+            "t1": {
+                "station": "workbench",
+                "minLevel": 2,
+                "head": [
                     {
-                        "item": "SurtlingCore",
-                        "amount": 1,
-                        "perLevel": 0
+                        "item": "HideTroll",
+                        "amount": 10,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "BoneFragments",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "TrollHide",
+                        "amount": 15,
+                        "perLevel": 8
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "TrollHide",
+                        "amount": 15,
+                        "perLevel": 8
+                    }
+                ]
+            },
+            "t2": {
+                "station": "workbench",
+                "minLevel": 4,
+                "head": [
+                    {
+                        "item": "Chitin",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 5,
+                        "perLevel": 3
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "Chitin",
+                        "amount": 10,
+                        "perLevel": 7
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 8,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "SerpentScale",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "Chitin",
+                        "amount": 10,
+                        "perLevel": 7
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 8,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "SerpentScale",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ]
+            },
+            "t3": {
+                "station": "forge",
+                "minLevel": 2,
+                "head": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 10,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 2,
+                        "perLevel": 2
                     },
                     {
                         "item": "LinenThread",
                         "amount": 5,
-                        "perLevel": 0
+                        "perLevel": 5
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 15,
+                        "perLevel": 5
                     },
                     {
-                        "item": "Chitin",
-                        "amount": 1,
-                        "perLevel": 0
+                        "item": "LoxPelt",
+                        "amount": 6,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "LinenThread",
+                        "amount": 15,
+                        "perLevel": 10
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 15,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 6,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "LinenThread",
+                        "amount": 15,
+                        "perLevel": 10
+                    }
+                ]
+            },
+            "t4": {
+                "station": "piece_thorsforge",
+                "minLevel": 1,
+                "head": [
+                    {
+                        "item": "HeavymetalBar",
+                        "amount": 8,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "Heavyscale",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 3,
+                        "perLevel": 1
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "HeavymetalBar",
+                        "amount": 12,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "Heavyscale",
+                        "amount": 15,
+                        "perLevel": 10
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 5,
+                        "perLevel": 3
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "HeavymetalBar",
+                        "amount": 12,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "Heavyscale",
+                        "amount": 15,
+                        "perLevel": 10
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 5,
+                        "perLevel": 3
+                    }
+                ]
+            },
+            "t5": {
+                "station": "piece_thorsforge",
+                "minLevel": 1,
+                "head": [
+                    {
+                        "item": "TrophySGolem",
+                        "amount": 3,
+                        "perLevel": 1
+                    },
+                    {
+                        "item": "Crystal",
+                        "amount": 3,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "FrometalBar",
+                        "amount": 6,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "Crystal",
+                        "amount": 8,
+                        "perLevel": 6
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 12,
+                        "perLevel": 8
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "FrometalBar",
+                        "amount": 6,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "Crystal",
+                        "amount": 8,
+                        "perLevel": 6
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 12,
+                        "perLevel": 8
                     }
                 ]
             }
         },
-        "upgradePath": {
-            "berserker": {
-                "t1": {
-                    "station": "workbench",
-                    "minLevel": 3,
-                    "head": [
-                        {
-                            "item": "Root",
-                            "amount": 10,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "ElderBark",
-                            "amount": 10,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "DeerHide",
-                            "amount": 2,
-                            "perLevel": 1
-                        }
-                    ],
-                    "chest": [
-                        {
-                            "item": "Root",
-                            "amount": 10,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "ElderBark",
-                            "amount": 10,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "DeerHide",
-                            "amount": 2,
-                            "perLevel": 1
-                        }
-                    ],
-                    "legs": [
-                        {
-                            "item": "Root",
-                            "amount": 10,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "ElderBark",
-                            "amount": 10,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "DeerHide",
-                            "amount": 2,
-                            "perLevel": 1
-                        }
-                    ]
-                },
-                "t2": {
-                    "station": "workbench",
-                    "minLevel": 5,
-                    "head": [
-                        {
-                            "item": "WolfHairBundle",
-                            "amount": 15,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "WolfPelt",
-                            "amount": 5,
-                            "perLevel": 3
-                        },
-                        {
-                            "item": "TrophyCultist",
-                            "amount": 1,
-                            "perLevel": 0
-                        }
-                    ],
-                    "chest": [
-                        {
-                            "item": "WolfHairBundle",
-                            "amount": 15,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "WolfPelt",
-                            "amount": 5,
-                            "perLevel": 3
-                        },
-                        {
-                            "item": "LeatherScraps",
-                            "amount": 4,
-                            "perLevel": 2
-                        }
-                    ],
-                    "legs": [
-                        {
-                            "item": "WolfHairBundle",
-                            "amount": 15,
-                            "perLevel": 5
-                        },
-                        {
-                            "item": "WolfPelt",
-                            "amount": 5,
-                            "perLevel": 3
-                        },
-                        {
-                            "item": "LeatherScraps",
-                            "amount": 4,
-                            "perLevel": 2
-                        }
-                    ]
-                },
-                "t3": {
-                    "station": "forge",
-                    "minLevel": 3,
-                    "head": [
-                        {
-                            "item": "BlackMetal",
-                            "amount": 20,
-                            "perLevel": 12
-                        },
-                        {
-                            "item": "LoxPelt",
-                            "amount": 2,
-                            "perLevel": 2
-                        },
-                        {
-                            "item": "TrophySerpent",
-                            "amount": 2,
-                            "perLevel": 0
-                        }
-                    ],
-                    "chest": [
-                        {
-                            "item": "BlackMetal",
-                            "amount": 20,
-                            "perLevel": 12
-                        },
-                        {
-                            "item": "LoxPelt",
-                            "amount": 5,
-                            "perLevel": 2
-                        },
-                        {
-                            "item": "SerpentScale",
-                            "amount": 10,
-                            "perLevel": 5
-                        }
-                    ],
-                    "legs": [
-                        {
-                            "item": "BlackMetal",
-                            "amount": 20,
-                            "perLevel": 12
-                        },
-                        {
-                            "item": "LoxPelt",
-                            "amount": 5,
-                            "perLevel": 2
-                        },
-                        {
-                            "item": "SerpentScale",
-                            "amount": 10,
-                            "perLevel": 5
-                        }
-                    ]
-                },
-                "t4": {
-                    "station": "piece_thorsforge",
-                    "minLevel": 1,
-                    "head": [
-                        {
-                            "item": "FrometalBar",
-                            "amount": 15,
-                            "perLevel": 10
-                        },
-                        {
-                            "item": "LoxPelt",
-                            "amount": 5,
-                            "perLevel": 2
-                        },
-                        {
-                            "item": "TrophyHatchling",
-                            "amount": 2,
-                            "perLevel": 0
-                        }
-                    ],
-                    "chest": [
-                        {
-                            "item": "FrometalBar",
-                            "amount": 15,
-                            "perLevel": 15
-                        },
-                        {
-                            "item": "LoxPelt",
-                            "amount": 8,
-                            "perLevel": 4
-                        },
-                        {
-                            "item": "Obsidian",
-                            "amount": 10,
-                            "perLevel": 8
-                        }
-                    ],
-                    "legs": [
-                        {
-                            "item": "FrometalBar",
-                            "amount": 15,
-                            "perLevel": 15
-                        },
-                        {
-                            "item": "LoxPelt",
-                            "amount": 8,
-                            "perLevel": 4
-                        },
-                        {
-                            "item": "Obsidian",
-                            "amount": 10,
-                            "perLevel": 8
-                        }
-                    ]
-                },
-                "t5": {
-                    "station": "piece_thorsforge",
-                    "minLevel": 1,
-                    "head": [
-                        {
-                            "item": "Flametal",
-                            "amount": 15,
-                            "perLevel": 10
-                        },
-                        {
-                            "item": "SurtlingCore",
-                            "amount": 3,
-                            "perLevel": 1
-                        },
-                        {
-                            "item": "DeerHide",
-                            "amount": 2,
-                            "perLevel": 1
-                        }
-                    ],
-                    "chest": [
-                        {
-                            "item": "Flametal",
-                            "amount": 20,
-                            "perLevel": 15
-                        },
-                        {
-                            "item": "SurtlingCore",
-                            "amount": 5,
-                            "perLevel": 2
-                        },
-                        {
-                            "item": "Stone",
-                            "amount": 5,
-                            "perLevel": 2
-                        }
-                    ],
-                    "legs": [
-                        {
-                            "item": "Flametal",
-                            "amount": 20,
-                            "perLevel": 15
-                        },
-                        {
-                            "item": "SurtlingCore",
-                            "amount": 5,
-                            "perLevel": 2
-                        },
-                        {
-                            "item": "Forgedscale",
-                            "amount": 5,
-                            "perLevel": 5
-                        }
-                    ]
-                }
+        "shieldbrother": {
+            "t1": {
+                "station": "forge",
+                "minLevel": 2,
+                "head": [
+                    {
+                        "item": "Iron",
+                        "amount": 20,
+                        "perLevel": 15
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 8,
+                        "perLevel": 4
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "Iron",
+                        "amount": 25,
+                        "perLevel": 20
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 12,
+                        "perLevel": 6
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "Iron",
+                        "amount": 25,
+                        "perLevel": 20
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 12,
+                        "perLevel": 6
+                    }
+                ]
+            },
+            "t2": {
+                "station": "forge",
+                "minLevel": 3,
+                "head": [
+                    {
+                        "item": "Chitin",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 5,
+                        "perLevel": 3
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "Chitin",
+                        "amount": 10,
+                        "perLevel": 7
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 8,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "SerpentScale",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "Chitin",
+                        "amount": 10,
+                        "perLevel": 7
+                    },
+                    {
+                        "item": "LeatherScraps",
+                        "amount": 8,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "SerpentScale",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ]
+            },
+            "t3": {
+                "station": "forge",
+                "minLevel": 5,
+                "head": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 10,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 2,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "LinenThread",
+                        "amount": 5,
+                        "perLevel": 5
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 15,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 6,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "LinenThread",
+                        "amount": 15,
+                        "perLevel": 10
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "BlackMetal",
+                        "amount": 15,
+                        "perLevel": 5
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 6,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "LinenThread",
+                        "amount": 15,
+                        "perLevel": 10
+                    }
+                ]
+            },
+            "t4": {
+                "station": "piece_thorsforge",
+                "minLevel": 1,
+                "head": [
+                    {
+                        "item": "HeavymetalBar",
+                        "amount": 8,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "Heavyscale",
+                        "amount": 5,
+                        "perLevel": 3
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 3,
+                        "perLevel": 1
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "HeavymetalBar",
+                        "amount": 12,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "Heavyscale",
+                        "amount": 15,
+                        "perLevel": 10
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 5,
+                        "perLevel": 3
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "HeavymetalBar",
+                        "amount": 12,
+                        "perLevel": 4
+                    },
+                    {
+                        "item": "Heavyscale",
+                        "amount": 15,
+                        "perLevel": 10
+                    },
+                    {
+                        "item": "DeerHide",
+                        "amount": 5,
+                        "perLevel": 3
+                    }
+                ]
+            },
+            "t5": {
+                "station": "piece_thorsforge",
+                "minLevel": 1,
+                "head": [
+                    {
+                        "item": "TrophySGolem",
+                        "amount": 3,
+                        "perLevel": 1
+                    },
+                    {
+                        "item": "Crystal",
+                        "amount": 3,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 6,
+                        "perLevel": 3
+                    }
+                ],
+                "chest": [
+                    {
+                        "item": "FrometalBar",
+                        "amount": 6,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "Crystal",
+                        "amount": 8,
+                        "perLevel": 6
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 12,
+                        "perLevel": 8
+                    }
+                ],
+                "legs": [
+                    {
+                        "item": "FrometalBar",
+                        "amount": 6,
+                        "perLevel": 2
+                    },
+                    {
+                        "item": "Crystal",
+                        "amount": 8,
+                        "perLevel": 6
+                    },
+                    {
+                        "item": "LoxPelt",
+                        "amount": 12,
+                        "perLevel": 8
+                    }
+                ]
             }
         }
     }
