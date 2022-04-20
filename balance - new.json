@@ -572,7 +572,7 @@
         "baseArmor": 22,
         "armorPerLevel": 2,
         "globalMoveMod": 0.08,
-        "setEffect": "",
+        "setEffect": "pinning",
         "headEffect": "frostningvuln",
         "chestEffect": "wyrdarrow2",
         "legsEffect": "backstabdmg",

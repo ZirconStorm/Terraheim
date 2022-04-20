@@ -182,42 +182,102 @@ namespace Terraheim.Utility
                     HelmetArmor = 1
                 }
             },
-            {"chaosT0", new ArmorSet
+            {"serpent", new ArmorSet
                 {
-                    HelmetID = "T1ChaosPlateArmor",
-                    ChestID = "T1ChaosPlateHelm",
-                    LegsID = "T1ChaosPlateLegs",
-                    HelmetName = "$item_helmet_chaos_t",
-                    ChestName = "$item_chest_chaos_t",
-                    LegsName = "$item_legs_chaos_t",
-                    ClassName = "$class_berserker",
-                    HelmetArmor = 0
+                    HelmetID = "ArmorSerpentHelmet",
+                    ChestID = "ArmorSerpentChest",
+                    LegsID = "ArmorSerpentLegs",
+                    HelmetName = "$item_helmet_serpent_t",
+                    ChestName = "$item_chest_serpent_t",
+                    LegsName = "$item_legs_serpent_t",
+                    ClassName = "$class_ranger",
+                    HelmetArmor = 1
                 }
             },
-            {"chaosT1", new ArmorSet
+            {"dragonslayer", new ArmorSet
                 {
-                    HelmetID = "T2ChaosPlateArmor",
-                    ChestID = "T2ChaosPlateHelm",
-                    LegsID = "T2ChaosPlateLegs",
-                    HelmetName = "$item_helmet_chaos_t1",
-                    ChestName = "$item_chest_chaos_t1",
-                    LegsName = "$item_legs_chaos_t1",
-                    ClassName = "$class_berserker",
-                    HelmetArmor = 0
+                    HelmetID = "ArmorDragonslayerHelmet",
+                    ChestID = "ArmorDragonslayerChest",
+                    LegsID = "ArmorDragonslayerLegs",
+                    HelmetName = "$item_helmet_dragonslayer_t",
+                    ChestName = "$item_chest_dragonslayer_t",
+                    LegsName = "$item_legs_dragonslayer_t",
+                    ClassName = "$class_tank",
+                    HelmetArmor = 1
                 }
             },
-            {"chaosT2", new ArmorSet
+            {"warrior", new ArmorSet
                 {
-                    HelmetID = "ChaosPlateHelm",
-                    ChestID = "ChaosPlateArmorBody",
-                    LegsID = "ChaosPlateLegs",
-                    HelmetName = "$item_helmet_chaos_t2",
-                    ChestName = "$item_chest_chaos_t2",
-                    LegsName = "$item_legs_chaos_t2",
-                    ClassName = "$class_berserker",
-                    HelmetArmor = 0
+                    HelmetID = "ArmorWarriorHelmet",
+                    ChestID = "ArmorWarriorChest",
+                    LegsID = "ArmorWarriorLegs",
+                    HelmetName = "$item_helmet_warrior_t",
+                    ChestName = "$item_chest_warrior_t",
+                    LegsName = "$item_legs_warrior_t",
+                    ClassName = "$class_thrower",
+                    HelmetArmor = 1
+                }
+            },
+            {"scorched", new ArmorSet
+                {
+                    HelmetID = "ArmorMistlandsHelmet",
+                    ChestID = "ArmorMistlandsChest",
+                    LegsID = "ArmorMistlandsLegs",
+                    HelmetName = "$item_helmet_scorched_t",
+                    ChestName = "$item_chest_scorched_t",
+                    LegsName = "$item_legs_scorched_t",
+                    ClassName = "$class_tank",
+                    HelmetArmor = 1
+                }
+            },
+            {"noble", new ArmorSet
+                {
+                    HelmetID = "ArmorNobleHelmet",
+                    ChestID = "ArmorNobleChest",
+                    LegsID = "ArmorNobleLegs",
+                    HelmetName = "$item_helmet_noble_t",
+                    ChestName = "$item_chest_noble_t",
+                    LegsName = "$item_legs_noble_t",
+                    ClassName = "$class_ranger",
+                    HelmetArmor = 1
                 }
             }
+            //{"chaosT0", new ArmorSet
+            //    {
+            //        HelmetID = "T1ChaosPlateArmor",
+            //        ChestID = "T1ChaosPlateHelm",
+            //        LegsID = "T1ChaosPlateLegs",
+            //        HelmetName = "$item_helmet_chaos_t",
+            //        ChestName = "$item_chest_chaos_t",
+            //        LegsName = "$item_legs_chaos_t",
+            //        ClassName = "$class_berserker",
+            //        HelmetArmor = 0
+            //    }
+            //},
+            //{"chaosT1", new ArmorSet
+            //    {
+            //        HelmetID = "T2ChaosPlateArmor",
+            //        ChestID = "T2ChaosPlateHelm",
+            //        LegsID = "T2ChaosPlateLegs",
+            //        HelmetName = "$item_helmet_chaos_t1",
+            //        ChestName = "$item_chest_chaos_t1",
+            //        LegsName = "$item_legs_chaos_t1",
+            //        ClassName = "$class_berserker",
+            //        HelmetArmor = 0
+            //    }
+            //},
+            //{"chaosT2", new ArmorSet
+            //    {
+            //        HelmetID = "ChaosPlateHelm",
+            //        ChestID = "ChaosPlateArmorBody",
+            //        LegsID = "ChaosPlateLegs",
+            //        HelmetName = "$item_helmet_chaos_t2",
+            //        ChestName = "$item_chest_chaos_t2",
+            //        LegsName = "$item_legs_chaos_t2",
+            //        ClassName = "$class_berserker",
+            //        HelmetArmor = 0
+            //    }
+            //}
         };
 
         public static readonly Dictionary<string, UtilityBelt> UtilityBelts = new Dictionary<string, UtilityBelt>()

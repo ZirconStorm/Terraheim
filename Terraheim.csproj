@@ -44,9 +44,6 @@
     <Reference Include="BepInEx">
       <HintPath>D:\ValheimModding\references\core\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="JudesEquipment">
-      <HintPath>D:\ValheimModding\references\JudesEquipment.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -225,10 +222,10 @@
     <Compile Include="Utility\UtilityFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="balance - new.json">
+    <None Include="balance.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="balance.json">
+    <None Include="balance.json.old">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="bundle_terraheimeffects" />

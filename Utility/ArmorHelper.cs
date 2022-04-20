@@ -18,6 +18,8 @@ namespace Terraheim.Utility
 
         public static StatusEffect GetSetEffect(string name, JToken values)
         {
+            Log.LogInfo($"Getting set effect *{name}*");
+            Log.LogInfo(values == null);
             switch (name)
             {
                 case "battlefuror":
@@ -51,18 +53,8 @@ namespace Terraheim.Utility
                         effect.SetIcon();
                         return effect;
                     }
-                case "wyrdarrow2":  //**NEW**
-                    {
-                        var effect = ScriptableObject.CreateInstance<SE_BowAoECounter>();
-                        effect.SetDamageBonus((float)values["setBonusVal"]);
-                        effect.SetActivationCount((int)values["setActivationCount"]);
-                        effect.SetAoESize((float)values["setAoESize"]);
-                        effect.SetIcon();
-                        return effect;
-                    }
                 case "njordsanger":
                     {
-                        Log.LogMessage("hello");
                         var effect = ScriptableObject.CreateInstance<SE_LightningAoECounter>();
                         effect.SetDamageBonus((float)values["setBonusVal"]);
                         effect.SetActivationCount((int)values["setActivationCount"]);
@@ -72,7 +64,6 @@ namespace Terraheim.Utility
                     }
                 case "firestorm":
                     {
-                        Log.LogMessage("hello");
                         var effect = ScriptableObject.CreateInstance<SE_FireAoECounter>();
                         effect.SetDamageBonus((float)values["setBonusVal"]);
                         effect.SetActivationCount((int)values["setActivationCount"]);
@@ -168,20 +159,58 @@ namespace Terraheim.Utility
                         effect.SetIcon();
                         return effect;
                     }
+                case "bluntdmg": //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_BluntArrows>();
+                        effect.SetDamageBonus((float)values["setBonusVal"]);
+                        return effect;
+                    }
                 default:
+                    Log.LogInfo($"Set effect {name} not found");
                     return null;
             }
         }
 
         public static StatusEffect GetArmorEffect(string name, JToken values, string location, ref string description)
         {
+            Log.LogInfo(name);
             switch (name)
             {
+                case "wyrdarrow2":  //**NEW**
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_BowAoECounter>();
+                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
+                        effect.SetActivationCount((int)values[$"{location}ActivationCount"]);
+                        effect.SetAoESize((float)values[$"{location}AoESize"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
+                case "battlefuror":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_FullHPDamageBonus>();
+                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
+                        effect.SetActivationHP((float)values[$"{location}ActivationHP"]);
+                        effect.InitIcon();
+                        return effect;
+                    }
+                case "brassflesh":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_ArmorOnHitListener>();
+                        effect.SetMaxArmor((float)values[$"{location}EffectVal"]);
+                        return effect;
+                    }
                 case "crit":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_CritChance>();
                         effect.SetCritChance((float)values[$"{location}EffectChance"]);
                         effect.SetCritBonus((float)values[$"{location}EffectVal"]);
+                        effect.SetIcon();
+                        return effect;
+                    }
+                case "hpregen":
+                    {
+                        var effect = ScriptableObject.CreateInstance<SE_HPRegen>();
+                        effect.setHealPercent((float)values[$"{location}EffectVal"]);
                         effect.SetIcon();
                         return effect;
                     }
@@ -540,18 +569,10 @@ namespace Terraheim.Utility
                             description += $"\n\nParry Bonus is increased by <color=cyan>{effect.GetParryBonus() * 100}%</color>.";
                         return effect;
                     }
-                case "bluntdmg": //**NEW**
-                    {
-                        var effect = ScriptableObject.CreateInstance<SE_BluntArrows>();
-                        effect.SetDamageBonus((float)values[$"{location}EffectVal"]);
-                        if (!Terraheim.hasAuga)
-                            description += $"\n\nArrows deal an additional <color=cyan>{effect.GetDamageBonus() * 100}%</color> damage as blunt.";
-                        return effect;
-                    }
                 case "coindrop":
                     {
                         var effect = ScriptableObject.CreateInstance<SE_CoinDrop>();
-                        effect.SetChance((float)values[$"{location}EffectChance"]);
+                        effect.SetChance((float)values[$"{location}EffectVal"]);
                         effect.SetCoinAmount((float)values[$"{location}EffectAmount"]);
                         if(!Terraheim.hasAuga)
                             description += $"\n\n<color=cyan>{effect.GetChance()}%</color> chance to drop <color=cyan>{effect.GetCoinAmount()} coins</color> when striking an enemy.";
@@ -561,7 +582,7 @@ namespace Terraheim.Utility
                     {
                         var effect = ScriptableObject.CreateInstance<SE_RestoreResources>();
                         effect.SetChance((float)values[$"{location}EffectChance"]);
-                        effect.SetStaminaAmount((int)values[$"{location}Stamina"]);
+                        effect.SetStaminaAmount((int)values[$"{location}EffectVal"]);
                         if(!Terraheim.hasAuga)
                             description += $"\n\nOn hit, restore <color=cyan>{effect.GetStaminaAmount()}</color> Stamina, {effect.GetChance()}% chance to <color=cyan>refund ammo</color>.";
                         return effect;
@@ -589,8 +610,10 @@ namespace Terraheim.Utility
             }
         }
 
-        public static void ModArmorSet(string setName, ref ItemDrop.ItemData helmet,ref ItemDrop.ItemData chest, ref ItemDrop.ItemData legs, JToken values, bool isNewSet, int i)
+        public static void ModArmorSet(string setName, ref ItemDrop.ItemData helmet, ref ItemDrop.ItemData chest, ref ItemDrop.ItemData legs, JToken values, bool isNewSet, int i)
         {
+            Log.LogInfo($"Modding {setName}");
+            Log.LogInfo($"values is null: ${values == null}");
             ArmorSet armor = ArmorSets[setName];
             List<ItemDrop.ItemData> armorList = new List<ItemDrop.ItemData>() { helmet, chest, legs };
             JToken tierBalance;
@@ -604,6 +627,7 @@ namespace Terraheim.Utility
                 legs.m_shared.m_name = $"{armor.LegsName}0";
             }
 
+            //Log.LogInfo($"{setName} effect is {(string)values["setEffect"]}");
             StatusEffect setEffect = GetSetEffect((string)values["setEffect"], tierBalance);
 
             foreach (ItemDrop.ItemData item in armorList)
@@ -618,7 +642,7 @@ namespace Terraheim.Utility
                 item.m_shared.m_setName = (string)values["name"];
                 if (!item.m_shared.m_name.Contains("helmet"))
                     item.m_shared.m_movementModifier = (float)tierBalance["globalMoveMod"];
-                if(!Terraheim.hasAuga)
+                if (!Terraheim.hasAuga)
                     item.m_shared.m_description = $"<i>{armor.ClassName}</i>\n{item.m_shared.m_description}";
             }
 
@@ -650,10 +674,12 @@ namespace Terraheim.Utility
             else
                 Log.LogWarning($"{setName} Legs - No status effect found for provided effect: {(string)values["legsEffect"]}");
 
+            Log.LogInfo($"Finish creating {setName} set");
         }
 
         public static void ModArmorPiece(string setName, string location, ref ItemDrop.ItemData piece, JToken values, bool isNewSet, int i)
         {
+            Log.LogInfo($"values is null: ${values == null}");
             ArmorSet armor = ArmorSets[setName];
             JToken tierBalance;
             if (isNewSet)
@@ -707,6 +733,7 @@ namespace Terraheim.Utility
             //    piece.m_shared.m_damageModifiers.Add(mod2);
             //}
 
+            //Log.LogInfo($"{setName} effect is {(string)values["setEffect"]}");
             StatusEffect setEffect = GetSetEffect((string)values["setEffect"], tierBalance);
 
             piece.m_shared.m_armor = (float)tierBalance["baseArmor"];
@@ -800,6 +827,8 @@ namespace Terraheim.Utility
 
         public static void AddArmorPiece(string setName, string location)
         {
+            Log.LogInfo($"Adding ${location} for ${setName}");
+            Log.LogInfo($"set balance is null: {balance[setName] == null}");
             var setBalance = balance[setName];
             ArmorSet armor = ArmorSets[setName];
             var className = setBalance["class"]; // armor class
@@ -842,7 +871,7 @@ namespace Terraheim.Utility
                     clonedPiece.name = $"{id}T{i}_Terraheim_BarbarianArmor_AddNewSets";
                 }
 
-            CustomItem piece = new CustomItem(clonedPiece, true);
+                CustomItem piece = new CustomItem(clonedPiece, true);
 
                 piece.ItemDrop.m_itemData.m_shared.m_name = $"{name}{i}";
 
@@ -1096,6 +1125,7 @@ namespace Terraheim.Utility
 
         public static void AddTieredRecipes(string setName, bool hasHelmet = true)
         {
+            Log.LogWarning($"Adding tiered recipe for {setName}");
             ArmorSet armor = ArmorSets[setName];
             string armorSetName = char.ToUpper(setName[0]) + setName.Substring(1);
             for (int i = (int)balance[setName]["upgrades"]["startingTier"] + 1; i < 6; i++)

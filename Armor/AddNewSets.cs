@@ -16,11 +16,11 @@ namespace Terraheim.Armor
             if ((bool)Terraheim.balance["leather"]["enabled"])
                 ArmorHelper.AddArmorSet("leather");
             //ArmorHelper.AddArmorSet("rags");
-            if ((bool)Terraheim.balance["rags"]["enabled"])
-            { 
-                ArmorHelper.AddArmorPiece("rags", "chest");
-                ArmorHelper.AddArmorPiece("rags", "legs");
-            }
+            //if ((bool)Terraheim.balance["rags"]["enabled"])
+            //{ 
+            //    ArmorHelper.AddArmorPiece("rags", "chest");
+            //    ArmorHelper.AddArmorPiece("rags", "legs");
+            //}
 
             if ((bool)Terraheim.balance["trollLeather"]["enabled"])
                 ArmorHelper.AddArmorSet("trollLeather");
@@ -39,18 +39,19 @@ namespace Terraheim.Armor
             if (Terraheim.hasJudesEquipment)
             {
                 ArmorHelper.AddArmorSet("barbarian");
-                //ArmorHelper.AddArmorSet("warrior");
+                ArmorHelper.AddArmorSet("warrior");
                 ArmorHelper.AddArmorSet("plate");
-                //ArmorHelper.AddArmorSet("dragonslayer");
+                ArmorHelper.AddArmorSet("dragonslayer");
                 ArmorHelper.AddArmorSet("nomad");
-                //ArmorHelper.AddArmorSet("serpent");
-                //ArmorHelper.AddArmorSet("scorched");
+                ArmorHelper.AddArmorSet("serpent");
+                ArmorHelper.AddArmorSet("scorched");
+                ArmorHelper.AddArmorSet("noble");
             }
             else if (Terraheim.hasBarbarianArmor)
                 ArmorHelper.AddArmorSet("barbarian");
 
-            if (Terraheim.hasChaosArmor)
-                ArmorHelper.AddArmorSet("chaos");
+            //if (Terraheim.hasChaosArmor)
+            //    ArmorHelper.AddArmorSet("chaos");
 
             ArmorHelper.AddBelt("woodsmanHelmet");
             ArmorHelper.AddBelt("minersBelt");
@@ -91,6 +92,10 @@ namespace Terraheim.Armor
                 ArmorHelper.AddTieredRecipes("barbarian");
                 ArmorHelper.AddTieredRecipes("plate");
                 ArmorHelper.AddTieredRecipes("nomad");
+                ArmorHelper.AddTieredRecipes("dragonslayer");
+                ArmorHelper.AddTieredRecipes("warrior");
+                ArmorHelper.AddTieredRecipes("scorched");
+                ArmorHelper.AddTieredRecipes("noble");
             }
             //else if (Terraheim.hasBarbarianArmor)
             //{
@@ -99,8 +104,8 @@ namespace Terraheim.Armor
             //}
             /*if (Terraheim.hasChaosArmor)
                 ArmorHelper.AddTieredRecipes("chaos");*/
-            if((bool)Terraheim.balance["rags"]["enabled"])
-                ArmorHelper.AddTieredRecipes("rags", false);
+            //if((bool)Terraheim.balance["rags"]["enabled"])
+            //    ArmorHelper.AddTieredRecipes("rags", false);
 
 
             ArmorHelper.AddTieredCape("CapeDeerHide");
