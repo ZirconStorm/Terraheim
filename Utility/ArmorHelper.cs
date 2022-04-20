@@ -18,8 +18,8 @@ namespace Terraheim.Utility
 
         public static StatusEffect GetSetEffect(string name, JToken values)
         {
-            Log.LogInfo($"Getting set effect *{name}*");
-            Log.LogInfo(values == null);
+            //Log.LogInfo($"Getting set effect *{name}*");
+            //Log.LogInfo(values == null);
             switch (name)
             {
                 case "battlefuror":
@@ -173,7 +173,7 @@ namespace Terraheim.Utility
 
         public static StatusEffect GetArmorEffect(string name, JToken values, string location, ref string description)
         {
-            Log.LogInfo(name);
+            //Log.LogInfo(name);
             switch (name)
             {
                 case "wyrdarrow2":  //**NEW**
@@ -612,8 +612,8 @@ namespace Terraheim.Utility
 
         public static void ModArmorSet(string setName, ref ItemDrop.ItemData helmet, ref ItemDrop.ItemData chest, ref ItemDrop.ItemData legs, JToken values, bool isNewSet, int i)
         {
-            Log.LogInfo($"Modding {setName}");
-            Log.LogInfo($"values is null: ${values == null}");
+            Log.LogInfo($"Modding {setName} for tier {i}");
+            //Log.LogInfo($"values is null: ${values == null}");
             ArmorSet armor = ArmorSets[setName];
             List<ItemDrop.ItemData> armorList = new List<ItemDrop.ItemData>() { helmet, chest, legs };
             JToken tierBalance;
@@ -674,12 +674,12 @@ namespace Terraheim.Utility
             else
                 Log.LogWarning($"{setName} Legs - No status effect found for provided effect: {(string)values["legsEffect"]}");
 
-            Log.LogInfo($"Finish creating {setName} set");
+            Log.LogInfo($"Finished creating {setName} set");
         }
 
         public static void ModArmorPiece(string setName, string location, ref ItemDrop.ItemData piece, JToken values, bool isNewSet, int i)
         {
-            Log.LogInfo($"values is null: ${values == null}");
+            //Log.LogInfo($"values is null: ${values == null}");
             ArmorSet armor = ArmorSets[setName];
             JToken tierBalance;
             if (isNewSet)
@@ -828,7 +828,7 @@ namespace Terraheim.Utility
         public static void AddArmorPiece(string setName, string location)
         {
             Log.LogInfo($"Adding ${location} for ${setName}");
-            Log.LogInfo($"set balance is null: {balance[setName] == null}");
+            //Log.LogInfo($"set balance is null: {balance[setName] == null}");
             var setBalance = balance[setName];
             ArmorSet armor = ArmorSets[setName];
             var className = setBalance["class"]; // armor class
@@ -857,8 +857,17 @@ namespace Terraheim.Utility
                 }
 
                 //Create mocks for use in clones
-
-                GameObject clonedPiece = PrefabManager.Instance.CreateClonedPrefab($"{id}T{i}", id);
+                GameObject clonedPiece = null;
+                if (setName == "heavyarcher") 
+                {
+                    clonedPiece = PrefabManager.Instance.CreateClonedPrefab($"ArmorHeavyarcher{location}T{i}", id);
+                }
+                else if (setName == "heavyknight")
+                {
+                    clonedPiece = PrefabManager.Instance.CreateClonedPrefab($"ArmorHeavyknight{location}T{i}", id);
+                }
+                else
+                    clonedPiece = PrefabManager.Instance.CreateClonedPrefab($"{id}T{i}", id);
 
                 //Set ID so that previous armors still exist
                 if (setName != "barbarian")
@@ -926,7 +935,7 @@ namespace Terraheim.Utility
                 //Create the custome recipe
                 CustomRecipe customPieceRecipe = new CustomRecipe(recipe, fixReference: true, fixRequirementReferences: true);
 
-                Log.LogInfo($"{name} created: {ItemManager.Instance.AddItem(piece)}");
+                Log.LogInfo($"{piece} created: {ItemManager.Instance.AddItem(piece)}");
 
                 //Add recipes to DB
                 ItemManager.Instance.AddRecipe(customPieceRecipe);
@@ -1130,15 +1139,18 @@ namespace Terraheim.Utility
             string armorSetName = char.ToUpper(setName[0]) + setName.Substring(1);
             for (int i = (int)balance[setName]["upgrades"]["startingTier"] + 1; i < 6; i++)
             {
+                Log.LogInfo($"\tAdding tier {i}");
                 Recipe helmetRecipe = null;
                 Recipe chestRecipe;
                 Recipe legsRecipe;
                 if (setName != "barbarian")
                 {
-                    if(hasHelmet)
+                    Log.LogInfo($"\t\tfetching prefabs for T{i}_Terraheim_AddNewSets_Add{armorSetName}Armor");
+                    if (hasHelmet)
                         helmetRecipe = ObjectDB.instance.GetRecipe(ObjectDB.instance.GetItemPrefab($"{armor.HelmetID}T{i}_Terraheim_AddNewSets_Add{armorSetName}Armor").GetComponent<ItemDrop>().m_itemData);
                     chestRecipe = ObjectDB.instance.GetRecipe(ObjectDB.instance.GetItemPrefab($"{armor.ChestID}T{i}_Terraheim_AddNewSets_Add{armorSetName}Armor").GetComponent<ItemDrop>().m_itemData);
                     legsRecipe = ObjectDB.instance.GetRecipe(ObjectDB.instance.GetItemPrefab($"{armor.LegsID}T{i}_Terraheim_AddNewSets_Add{armorSetName}Armor").GetComponent<ItemDrop>().m_itemData);
+                    Log.LogInfo("\t\tprefabs fetched!");
                 }
                 else
                 {
@@ -1152,6 +1164,8 @@ namespace Terraheim.Utility
                     helmetList = helmetRecipe.m_resources.ToList();
                 List<Piece.Requirement> chestList = chestRecipe.m_resources.ToList();
                 List<Piece.Requirement> legsList = legsRecipe.m_resources.ToList();
+
+                Log.LogInfo("\t\tpassed resource requirement loading");
 
                 if (setName == "silver")
                 {

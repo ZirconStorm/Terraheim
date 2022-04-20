@@ -36,6 +36,13 @@ namespace Terraheim.Armor
 
             if ((bool)Terraheim.balance["padded"]["enabled"])
                 ArmorHelper.AddArmorSet("padded");
+
+            if ((bool)Terraheim.balance["root"]["enabled"])
+                ArmorHelper.AddArmorSet("root");
+
+            if ((bool)Terraheim.balance["fenris"]["enabled"])
+                ArmorHelper.AddArmorSet("fenris");
+
             if (Terraheim.hasJudesEquipment)
             {
                 ArmorHelper.AddArmorSet("barbarian");
@@ -46,6 +53,8 @@ namespace Terraheim.Armor
                 ArmorHelper.AddArmorSet("serpent");
                 ArmorHelper.AddArmorSet("scorched");
                 ArmorHelper.AddArmorSet("noble");
+                ArmorHelper.AddArmorSet("heavyarcher");
+                ArmorHelper.AddArmorSet("heavyknight");
             }
             else if (Terraheim.hasBarbarianArmor)
                 ArmorHelper.AddArmorSet("barbarian");
@@ -84,6 +93,10 @@ namespace Terraheim.Armor
                 ArmorHelper.AddTieredRecipes("silver");
             if ((bool)Terraheim.balance["padded"]["enabled"])
                 ArmorHelper.AddTieredRecipes("padded");
+            if ((bool)Terraheim.balance["root"]["enabled"])
+                ArmorHelper.AddTieredRecipes("root");
+            if ((bool)Terraheim.balance["fenris"]["enabled"])
+                ArmorHelper.AddTieredRecipes("fenris");
             if (Terraheim.hasJudesEquipment)
             {
                 //ArmorHelper.AddArmorSet("barbarian");

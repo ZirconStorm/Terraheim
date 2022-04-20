@@ -537,9 +537,9 @@
             }
         }
     },
-    "heavymetal": {
+    "heavyarcher": {
         "enabled": true,
-        "name": "heavymetal",
+        "name": "heavyarcher",
         "class": "bowman",
         "baseArmor": 26,
         "armorPerLevel": 2,

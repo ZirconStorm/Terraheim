@@ -122,6 +122,18 @@ namespace Terraheim.Utility
                     HelmetArmor = 2
                 }
             },
+            {"root", new ArmorSet
+                {
+                    HelmetID = "HelmetRoot",
+                    ChestID = "ArmorRootChest",
+                    LegsID = "ArmorRootLegs",
+                    HelmetName = "$item_helmet_root_t",
+                    ChestName = "$item_chest_root_t",
+                    LegsName = "$item_legs_root_t",
+                    ClassName = "$class_berserker",
+                    HelmetArmor = 2
+                }
+            },
             {"silver", new ArmorSet
                 {
                     HelmetID = "HelmetDrake",
@@ -130,6 +142,18 @@ namespace Terraheim.Utility
                     HelmetName = "$item_helmet_drake_t",
                     ChestName = "$item_chest_wolf_t",
                     LegsName = "$item_legs_wolf_t",
+                    ClassName = "$class_ranger",
+                    HelmetArmor = 2
+                }
+            },
+            {"fenris", new ArmorSet
+                {
+                    HelmetID = "HelmetFenring",
+                    ChestID = "ArmorFenringChest",
+                    LegsID = "ArmorFenringLegs",
+                    HelmetName = "$item_helmet_fenring_t",
+                    ChestName = "$item_chest_fenring_t",
+                    LegsName = "$item_legs_fenring_t",
                     ClassName = "$class_ranger",
                     HelmetArmor = 2
                 }
@@ -238,6 +262,30 @@ namespace Terraheim.Utility
                     HelmetName = "$item_helmet_noble_t",
                     ChestName = "$item_chest_noble_t",
                     LegsName = "$item_legs_noble_t",
+                    ClassName = "$class_ranger",
+                    HelmetArmor = 1
+                }
+            },
+            {"heavyarcher", new ArmorSet
+                {
+                    HelmetID = "HelmetIron",
+                    ChestID = "ArmorIronChest",
+                    LegsID = "ArmorIronLegs",
+                    HelmetName = "$item_helmet_heavyarcher_t",
+                    ChestName = "$item_chest_heavyarcher_t",
+                    LegsName = "$item_legs_heavyarcher_t",
+                    ClassName = "$class_tank",
+                    HelmetArmor = 1
+                }
+            },
+            {"heavyknight", new ArmorSet
+                {
+                    HelmetID = "ArmorSerpentHelmet",
+                    ChestID = "ArmorSerpentChest",
+                    LegsID = "ArmorSerpentLegs",
+                    HelmetName = "$item_helmet_heavyknight_t",
+                    ChestName = "$item_chest_heavyknight_t",
+                    LegsName = "$item_legs_heavyknight_t",
                     ClassName = "$class_ranger",
                     HelmetArmor = 1
                 }
